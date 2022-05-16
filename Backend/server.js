@@ -7,24 +7,30 @@ import usersRoute from './routes/users.js'
 import hotelsRoute from './routes/hotelsRoutes.js'
 import roomsRoute from './routes/rooms.js'
 import errorHandler from './middleware/errorHandler.js'
-dotenv.config()
+import cookieParser from 'cookie-parser'
 
-const PORT = 8800
+dotenv.config()
+ //Connect with DB
+  connectDB()
+const PORT = 3000
 const app = express()
 
 //middleware
+app.use(cookieParser())
 app.use(express.json({ limit: '50mb' }))
 app.use(express.urlencoded({ limit: '50mb', extended: true }))
+
+
+//? Middlewaares of routes
 app.use('/api/auth', authRoute)
 app.use('/api/users', usersRoute)
 app.use('/api/hotels', hotelsRoute)
 app.use('/api/rooms', roomsRoute)
 
+
 //Error Handler middleware
 app.use(errorHandler)
 
 app.listen(PORT, () => {
-  //Connect with DB
-  connectDB()
   console.log(`Server is on ${PORT}`)
 })

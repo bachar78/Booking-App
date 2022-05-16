@@ -6,7 +6,7 @@ import Hotel from '../models/hotelsModel.js'
 //@access Private
 const createHotel = asyncHandler(async (req, res) => {
   const { name, type, city, address, distance, desc, cheapestPrice } = req.body
-  if (!name || !type || !city || address || distance || desc || cheapestPrice) {
+  if (!name || !type || !city || !address || !distance || !desc || !cheapestPrice) {
     res.status(400)
     throw new Error('Please fill all the fields')
   }
