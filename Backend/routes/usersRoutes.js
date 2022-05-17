@@ -36,7 +36,7 @@ router.route('/').get(verifyToken, verifyAdmin, getUsers)
 //? Update & Delete & GetOne user
 router
   .route('/:id')
-  .put(updateUser, verifyToken, verifyUser)
+  .put(verifyToken, verifyUser, updateUser)
   .delete(verifyToken, verifyUser, deleteUser)
   .get(verifyToken, verifyUser, getUser)
 export default router

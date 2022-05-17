@@ -1,9 +1,5 @@
 import express from 'express'
-import {
-  verifyToken,
-  verifyUser,
-  verifyAdmin,
-} from '../middleware/verifyToken.js'
+import { verifyToken, verifyAdmin } from '../middleware/verifyToken.js'
 
 const router = express.Router()
 import {
