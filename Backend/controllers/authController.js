@@ -19,7 +19,7 @@ const register = asyncHandler(async (req, res) => {
       'The username is already used please choose another usename'
     )
   }
-  //?Hash Password
+  //? Hash Password
   const salt = await bcrypt.genSalt(10)
   const hashedPassword = await bcrypt.hash(password, salt)
   const newUser = await User.create({
