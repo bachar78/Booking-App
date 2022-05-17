@@ -10,9 +10,9 @@ import errorHandler from './middleware/errorHandler.js'
 import cookieParser from 'cookie-parser'
 
 dotenv.config()
- //Connect with DB
-  connectDB()
-const PORT = 3000
+//Connect with DB
+connectDB()
+const PORT = 5001
 const app = express()
 
 //middleware
@@ -20,13 +20,11 @@ app.use(cookieParser())
 app.use(express.json({ limit: '50mb' }))
 app.use(express.urlencoded({ limit: '50mb', extended: true }))
 
-
 //? Middlewaares of routes
 app.use('/api/auth', authRoute)
 app.use('/api/users', usersRoute)
 app.use('/api/hotels', hotelsRoute)
 app.use('/api/rooms', roomsRoute)
-
 
 //Error Handler middleware
 app.use(errorHandler)
