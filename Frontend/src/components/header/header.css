@@ -1,0 +1,128 @@
+.header {
+  background-color: #003580;
+  color: white;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.headerContainer {
+  width: 100%;
+  max-width: 102.4rem;
+  margin: 2rem 0 6rem 0;
+}
+
+.headerList {
+  display: flex;
+  gap: 4rem;
+}
+
+.date {
+  position: absolute;
+  top: 4rem;
+}
+
+.headerListItem {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.active {
+  border: 1px solid white;
+  padding: 1rem;
+  border-radius: 2rem;
+}
+
+.headerTitle {
+  margin-top: 3rem;
+}
+.headerDesc {
+  margin: 2rem 0;
+}
+
+.headerBtn {
+  background-color: #0071c2;
+  color: white;
+  font-weight: 500;
+  border: none;
+  padding: 1rem;
+  cursor: pointer;
+}
+
+.headerSearch {
+  height: 3rem;
+  background-color: white;
+  border: 3px solid #febb02;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 2rem 0;
+  border-radius: 5px;
+  position: absolute;
+  bottom: -2.4rem;
+  width: 100%;
+  max-width: 102.4rem;
+}
+
+.headerIcon {
+  color: lightgray;
+  cursor: pointer;
+}
+
+.headerSearchItem {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.headerSearchInput {
+  border: none;
+  outline: none;
+}
+
+.headerSearchText {
+  color: lightgray;
+  cursor: pointer;
+}
+
+.options {
+  position: absolute;
+  top: 4.1rem;
+  background-color: white;
+  color: gray;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 0.9);
+}
+
+.optionItem {
+  width: 16rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem;
+}
+
+.optionCounter {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1rem;
+}
+
+.optionCounterButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 1.5rem;
+  border: 1px solid #0071c2;
+  cursor: pointer;
+  background-color: white;
+  color: #0071c2;
+}
+
+.optionCounterButton:disabled {
+  cursor: not-allowed;
+  background-color: rgba(128, 128, 128, 0.2);
+}
