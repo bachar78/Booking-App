@@ -15,7 +15,9 @@
 }
 
 .logo {
-  font-weight: 500;
+  font-weight: 600;
+  font-size: 2rem;
+  cursor: pointer;
 }
 
 .navButton {
@@ -24,4 +26,6 @@
   padding: .5rem 1rem;
   cursor: pointer;
   color: #003580;
+  font-size: 1rem;
+  font-weight: 500;
 }

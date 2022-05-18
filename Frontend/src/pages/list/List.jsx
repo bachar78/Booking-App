@@ -5,7 +5,8 @@ import { useLocation } from 'react-router-dom'
 import { useState } from 'react'
 import { DateRange } from 'react-date-range'
 import './list.css'
-import { endOfWeekWithOptions } from 'date-fns/fp'
+import SearchItem from '../../components/searchItem/SearchItem'
+
 
 const List = () => {
   const location = useLocation()
@@ -86,7 +87,16 @@ const List = () => {
             </div>
             <button>Search</button>
           </div>
-          <div className='listResult'></div>
+          <div className='listResult'>
+            <SearchItem img='1' />
+            <SearchItem img='2' />
+            <SearchItem img='3' />
+            <SearchItem img='4' />
+            <SearchItem img='5' />
+            <SearchItem img='6' />
+            <SearchItem img='7' />
+            <SearchItem img='8' />
+          </div>
         </div>
       </div>
     </div>
