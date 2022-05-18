@@ -1,15 +1,19 @@
 .footer {
   width: 100%;
-  max-width: 100rem;
   font-size: 1rem;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .fLists {
   display: flex;
   width: 100%;
-  justify-content: space-between;
+  justify-content: space-around;
   margin-bottom: 4rem;
+  margin-top: 2rem;
 }
 
 .fList {
