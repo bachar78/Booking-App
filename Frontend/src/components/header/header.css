@@ -20,6 +20,7 @@
 .date {
   position: absolute;
   top: 4rem;
+  z-index: 2;
 }
 
 .headerListItem {
@@ -62,6 +63,7 @@
   bottom: -2.4rem;
   width: 100%;
   max-width: 102.4rem;
+  z-index: 2;
 }
 
 .headerIcon {
