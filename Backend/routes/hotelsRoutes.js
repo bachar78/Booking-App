@@ -8,9 +8,13 @@ import {
   getHotel,
   updateHotel,
   deleteHotel,
+  countByCity,
+  countByType
 } from '../controllers/hotelController.js'
 //Create and GetAll
 router.route('/').post(verifyToken, verifyAdmin, createHotel).get(getHotels)
+router.route('/countbycity').get(countByCity)
+router.route('/countbytype').get(countByType)
 
 //Update & Delete & GetOne
 router
@@ -18,4 +22,8 @@ router
   .put(verifyToken, verifyAdmin, updateHotel)
   .delete(verifyToken, verifyAdmin, deleteHotel)
   .get(getHotel)
+
+
+
+
 export default router

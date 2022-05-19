@@ -1,29 +1,31 @@
 import './featured.css'
+import useFetch from '../../hooks/useFetch'
 
 const Featured = () => {
+  const { data, error, loading } = useFetch(
+    '/hotels/countbycity?cities=Dublin,Rio de Janeiro,Buenos Aires'
+  )
+  if(error) {
+    return <p>{error.message}</p>
+  }
   return (
     <div className='featured'>
-      <div className="featuredItem">
-        <img src="./images/featured/dublin.jpg" alt="" />
-        <div className="featuredTitle">
-          <h1>Dublin</h1>
-          <h2>123 Properties</h2>
-        </div>
-      </div>
-      <div className="featuredItem">
-        <img src="./images/featured/rio.jpg" alt="" />
-        <div className="featuredTitle">
-          <h1>Rio de Janeiro</h1>
-          <h2>662 Properties</h2>
-        </div>
-      </div>
-      <div className="featuredItem">
-        <img src="./images/featured/buenos.jpg" alt="" />
-        <div className="featuredTitle">
-          <h1>Buenos Aires</h1>
-          <h2>598 Properties</h2>
-        </div>
-      </div>
+      {loading ? (
+        '... is loading'
+      ) : (
+        <>
+          {data &&
+            data.map((city, index) => (
+              <div className='featuredItem' key={index}>
+                <img src={`./images/featured/${index}.jpg`} alt='' />
+                <div className='featuredTitle'>
+                  <h1>{city.city}</h1>
+                  <h2> {city.number} Properties</h2>
+                </div>
+              </div>
+            ))}
+        </>
+      )}
     </div>
   )
 }
