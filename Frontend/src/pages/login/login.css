@@ -1,0 +1,72 @@
+.login {
+  min-height: 50vh;
+  width: 100%;
+  max-width: 100rem;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.logTitle {
+  margin: 2rem;
+  font-size: 3.4rem;
+  color: #1860c4;
+}
+
+.logForm {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.logElement {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 3rem;
+}
+
+.logElement > label,
+.logElement > input {
+  width: 100%;
+}
+
+.logElement > label {
+  color: gray;
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+}
+.logElement > input {
+  border: 2px solid #1860c4;
+  padding: 1rem;
+  color: rgb(51, 51, 51);
+  font-size: 1.3rem;
+}
+::placeholder {
+  color: rgb(224, 221, 238);
+  font-size: 1.3rem;
+}
+
+.logButton {
+  align-self: flex-start;
+  border: none;
+  padding: 0.8rem 1.8rem;
+  background-color: #0071c2;
+  color: white;
+  font-weight: 500;
+  font-size: 1.4rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.logError {
+  color: red;
+  font-weight: bold;
+  font-size: 2rem;
+}

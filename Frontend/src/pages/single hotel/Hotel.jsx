@@ -2,6 +2,7 @@ import './hotel.css'
 import { useState, useContext } from 'react'
 import Navbar from '../../components/navbar/Navbar'
 import Header from '../../components/header/Header'
+import Reserve from '../../components/reserve/Reserve'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faCircleArrowLeft,
@@ -12,18 +13,23 @@ import {
 import photos from '../../assets/photos'
 import Footer from '../../components/footer/Footer'
 import MailList from '../../components/mailList/MailList'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import useFetch from '../../hooks/useFetch'
 import { Link } from 'react-router-dom'
 import { SearchContext } from '../../context/SearchContext'
+import { AuthContext } from '../../context/AuthContext'
 import { dayDifference } from '../../utils/dayDifference'
 
 const Hotel = () => {
+  const navigate = useNavigate()
+  const { user } = useContext(AuthContext)
   const { dates, options } = useContext(SearchContext)
-  const days = dayDifference(dates[0].endDate, dates[0].startDate)
+  console.log(dates, options)
+  // const days = dayDifference(dates[0].endDate, dates[0].startDate)
   const { id } = useParams()
   const [slideNumber, setSlideNumber] = useState(0)
   const [open, setOpen] = useState(false)
+  const [openReserve, setOpenReserve] = useState(false)
   const openHandler = (index) => {
     setSlideNumber(index)
     setOpen(true)
@@ -50,6 +56,13 @@ const Hotel = () => {
         <Link to='/'>Go Back to Home Page</Link>
       </h1>
     )
+  }
+  const handleClick = () => {
+    if (user) {
+      setOpenReserve(true)
+    } else {
+      navigate('/login')
+    }
   }
   return (
     <div className=''>
@@ -125,19 +138,19 @@ const Hotel = () => {
                     </p>
                   </div>
                   <div className='hotelDetailsPrice'>
-                    <h1>Perfect for a {days}-night stay!</h1>
+                    {/* <h1>Perfect for a {days}-night stay!</h1> */}
                     <span>
                       Located in the real heart of Krakow, this property has an
                       excellent location score of 9.8!
                     </span>
                     <h2>
-                      $<b>{data.cheapestPrice}</b> * <b>{days}</b> night *{' '}
+                      {/* $<b>{data.cheapestPrice}</b> * <b>{days}</b> night *{' '} */}
                       <b>{options.room}</b> room(s)
                     </h2>
                     <h2>
-                      $<b>{data.cheapestPrice * days * options.room}</b>
+                      {/* $<b>{data.cheapestPrice * days * options.room}</b> */}
                     </h2>
-                    <button>Reserve or Book Now!</button>
+                    <button onClick={handleClick}>Reserve or Book Now!</button>
                   </div>
                 </div>
               </div>
@@ -145,6 +158,7 @@ const Hotel = () => {
       </div>
       <MailList />
       <Footer />
+      {openReserve && <Reserve hotelId={id} setOpenReserve={setOpenReserve} />}
     </div>
   )
 }

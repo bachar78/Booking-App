@@ -1,5 +1,6 @@
 import asyncHandler from 'express-async-handler'
 import Hotel from '../models/hotelsModel.js'
+import Room from '../models/roomsModel.js'
 
 //@des Create new Hotel
 //@route POST /api/hotels
@@ -79,6 +80,22 @@ const countByType = asyncHandler(async (req, res) => {
   ])
 })
 
+//@des Get the rooms of a single hotel
+//@route GET /api/rooms/:id
+//@access Public
+const getHotelRooms = asyncHandler(async (req, res) => {
+  const { id } = req.params
+  const hotel = await Hotel.findById(id)
+  if(!hotel) {
+    res.status(400)
+    throw new Error("Sorry Hotel Can't be found")
+  }
+  const list = await Promise.all(hotel.rooms.map(room => (
+    Room.findById(room)
+  )))
+  res.status(200).json(list)
+})
+
 //@des Get a single hotel
 //@route GET /api/hotels/:id
 //@access Public
@@ -130,4 +147,5 @@ export {
   deleteHotel,
   countByCity,
   countByType,
+  getHotelRooms,
 }

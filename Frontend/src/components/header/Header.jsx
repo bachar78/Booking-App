@@ -49,7 +49,6 @@ const Header = ({ type }) => {
     navigate('/hotels', { state: { destination, dates, options } })
   }
   
-
   return (
     <div className='header'>
       <div className='headerContainer'>
@@ -84,7 +83,6 @@ const Header = ({ type }) => {
               Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam
               dolor a quidem tempora suscipit reiciendis maxime odio fuga, .
             </p>
-            <button className='headerBtn'>Sign in / Register</button>
             <div className='headerSearch'>
               <div className='headerSearchItem'>
                 <FontAwesomeIcon icon={faBed} className='headerIcon' />
