@@ -1,8 +1,17 @@
 import './featuredProperties.css'
 import useFetch from '../../hooks/useFetch'
-
+const rating = (num) => {
+  if (num > 1 && num <= 3) {
+    return 'Good'
+  } else if (num > 3 && num <= 5) {
+    return 'Excelent'
+  } else if (num === 1) {
+    return 'Bad'
+  }
+}
 const FeaturedProperties = () => {
   const { error, loading, data } = useFetch('/hotels?featured=true&limit=4')
+
   return (
     <div className='fp'>
       {loading ? (
@@ -12,20 +21,18 @@ const FeaturedProperties = () => {
           {data &&
             data.map((property, index) => (
               <div className='fpItem' key={index}>
-                <img
-                  src={property.photos.length!==0?property.photos[0]:`./images/fb/${index}.jpg`}
-                  alt=''
-                  className='fbImg'
-                />
+                <img src={property.photos[0]} alt='' className='fbImg' />
                 <span className='fpName'>{property.name}</span>
                 <span className='fpCity'>{property.city}</span>
                 <span className='fpPrice'>
                   Starting from {property.cheapestPrice}$
                 </span>
-                <div className='fpRating'>
-                  <button>8.9</button>
-                  <span>Excellent</span>
-                </div>
+                {property.rating && (
+                  <div className='fpRating'>
+                    <button>{property.rating}</button>
+                    <span>{rating(property.rating)}</span>
+                  </div>
+                )}
               </div>
             ))}
         </>
@@ -74,4 +81,5 @@ const FeaturedProperties = () => {
   )
 }
 
+export { rating }
 export default FeaturedProperties

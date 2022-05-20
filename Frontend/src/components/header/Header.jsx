@@ -1,11 +1,12 @@
 import './header.css'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { DateRange } from 'react-date-range'
 import 'react-date-range/dist/styles.css' //? main css file
 import 'react-date-range/dist/theme/default.css' //? theme css file
 import { format } from 'date-fns'
 import { useNavigate } from 'react-router-dom'
+import { SearchContext } from '../../context/SearchContext'
 import {
   faBed,
   faCalendarDays,
@@ -24,7 +25,7 @@ const Header = ({ type }) => {
     children: 0,
     room: 1,
   })
-  const [date, setDate] = useState([
+  const [dates, setDates] = useState([
     {
       startDate: new Date(),
       endDate: new Date(),
@@ -38,9 +39,17 @@ const Header = ({ type }) => {
       [name]: operation === 'i' ? options[name] + 1 : options[name] - 1,
     }))
   }
+  const { dispatch } = useContext(SearchContext)
+
   const handleSearch = () => {
-    navigate('/hotels', { state: { destination, date, options } })
+    if (destination === '') {
+      return
+    }
+    dispatch({ type:'NEW_SEARCH', payload: { destination, dates, options } })
+    navigate('/hotels', { state: { destination, dates, options } })
   }
+  
+
   return (
     <div className='header'>
       <div className='headerContainer'>
@@ -95,16 +104,16 @@ const Header = ({ type }) => {
                 <span
                   onClick={() => setOpenDate(!openDate)}
                   className='headerSearchText'
-                >{`${format(date[0].startDate, 'dd/MM/yy')} to ${format(
-                  date[0].endDate,
+                >{`${format(dates[0].startDate, 'dd/MM/yy')} to ${format(
+                  dates[0].endDate,
                   'dd/MM/yy'
                 )}`}</span>
                 {openDate && (
                   <DateRange
                     editableDateInputs={true}
-                    onChange={(item) => setDate([item.selection])}
+                    onChange={(item) => setDates([item.selection])}
                     moveRangeOnFirstSelection={false}
-                    ranges={date}
+                    ranges={dates}
                     className='date'
                     minDate={new Date()}
                   />
@@ -115,7 +124,7 @@ const Header = ({ type }) => {
                 <span
                   onClick={() => setOpenOptions(!openOptions)}
                   className='headerSearchText'
-                >{`${options.adult} Adul(s) . ${options.children} child(ren) . ${options.room} room(s)`}</span>
+                >{`${options.adult} Adult(s) . ${options.children} child(ren) . ${options.room} room(s)`}</span>
                 {openOptions && (
                   <div className='options'>
                     <div className='optionItem'>

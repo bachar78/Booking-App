@@ -30,7 +30,13 @@ const createHotel = asyncHandler(async (req, res) => {
 //@route Get /api/hotels
 //@access Public
 const getHotels = asyncHandler(async (req, res) => {
-  const { min, max, others } = req.query
+  const { min, max, ...others } = req.query
+  if (!min || !max) {
+    const allHotels = await Hotel.find({
+      ...others,
+    }).limit(req.query.limit)
+    return res.status(200).json(allHotels)
+  }
   const allHotels = await Hotel.find({
     ...others,
     cheapestPrice: { $gt: min || 10, $lt: max || 100 },
@@ -39,6 +45,7 @@ const getHotels = asyncHandler(async (req, res) => {
     res.status(404)
     throw new Error('Hotels not found')
   }
+  console.log(req.query)
   res.status(200).json(allHotels)
 })
 //@des count Hotels by city
