@@ -83,7 +83,7 @@ const Hotel = () => {
             />
             <div className='sliderWrapper'>
               <img
-                src={data.photos[slideNumber]}
+                src={photos[slideNumber].src}
                 alt=''
                 className='sliderImg'
               />
@@ -113,12 +113,11 @@ const Hotel = () => {
                   get a free airport taxi
                 </span>
                 <div className='hotelImages'>
-                  {data.photos &&
-                    data.photos.map((image, index) => (
+                  {photos.map((image, index) => (
                       <div key={index} className='hotelImgWrapper'>
                         <img
                           onClick={() => openHandler(index)}
-                          src={image}
+                          src={image.src}
                           alt=''
                         />
                       </div>

@@ -4,7 +4,6 @@ import Navbar from '../../components/navbar/Navbar'
 import Header from '../../components/header/Header'
 import './login.css'
 import axios from 'axios'
-import Footer from '../../components/footer/Footer'
 import { useNavigate } from 'react-router-dom'
 const Login = () => {
   const [credentials, setCredentials] = useState({
@@ -65,7 +64,6 @@ const Login = () => {
           {error && <span className='logError'>{error.message}</span>}
         </form>
       </div>
-      <Footer />
     </>
   )
 }

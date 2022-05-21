@@ -132,8 +132,8 @@ const List = () => {
             {loading
               ? '...is loading'
               : data &&
-                data.map((hotel) => (
-                  <SearchItem hotel={hotel} img='1' key={hotel._id} />
+                data.map((hotel, index) => (
+                  <SearchItem hotel={hotel} img={index} key={hotel._id} />
                 ))}
           </div>
         </div>

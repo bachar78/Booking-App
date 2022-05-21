@@ -21,7 +21,7 @@ const FeaturedProperties = () => {
           {data &&
             data.map((property, index) => (
               <div className='fpItem' key={index}>
-                <img src={property.photos[0]} alt='' className='fbImg' />
+                <img src={`./images/fb/${index}.jpg`} alt='' className='fbImg' />
                 <span className='fpName'>{property.name}</span>
                 <span className='fpCity'>{property.city}</span>
                 <span className='fpPrice'>
