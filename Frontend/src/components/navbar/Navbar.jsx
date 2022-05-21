@@ -13,7 +13,8 @@ const Navbar = () => {
     <div className='navbar'>
       <div className='navContainer'>
         <span className='logo' onClick={() => navigate('/')}>
-          Full Life
+          Full{' '}
+          <img className='logoImg' src='./images/logo.png' alt='logo'></img> Life
         </span>
         <div className='navItems'>
           {user !== null ? (
