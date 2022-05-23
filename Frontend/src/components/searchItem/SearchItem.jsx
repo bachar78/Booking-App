@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 const SearchItem = ({ img, hotel }) => {
   return (
     <div className='searchItem'>
-      <img src={hotel.photos[0]} alt='' className='siImg' />
+      <img src={`/images/searchItem/${img}.jpg`} alt='' className='siImg' />
       <div className='siDesc'>
         <div className='siDesc'>
           <h1 className='siTitle'>{hotel.name}</h1>
