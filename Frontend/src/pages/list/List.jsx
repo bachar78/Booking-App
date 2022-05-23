@@ -1,8 +1,8 @@
 import Header from '../../components/header/Header'
 import Navbar from '../../components/navbar/Navbar'
 import { format } from 'date-fns'
-import { useLocation } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import { SearchContext } from '../../context/SearchContext'
 import { DateRange } from 'react-date-range'
 import './list.css'
 import SearchItem from '../../components/searchItem/SearchItem'
@@ -10,13 +10,19 @@ import useFetch from '../../hooks/useFetch'
 import { Link } from 'react-router-dom'
 
 const List = () => {
-  const location = useLocation()
-  const [destination, setDestination] = useState(location.state.destination)
-  const [dates, setDates] = useState(location.state.dates)
   const [openDate, setOpenDate] = useState(false)
-  const [options, setOptions] = useState(location.state.options)
   const [min, setMin] = useState(undefined)
   const [max, setMax] = useState(undefined)
+  const {
+    options,
+    setOptions,
+    destination,
+    setDestination,
+    dates,
+    setDates,
+    dispatch,
+    state,
+  } = useContext(SearchContext)
 
   const { error, data, loading, reFetch } = useFetch(
     `/hotels?city=${destination}`
@@ -30,6 +36,9 @@ const List = () => {
       </h1>
     )
   }
+  const handleOptions = (e) => {
+    setOptions((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+  }
   return (
     <div>
       <Navbar />
@@ -42,7 +51,7 @@ const List = () => {
               <label>Destination</label>
               <input
                 type='text'
-                placeholder={destination}
+                placeholder='Insert Ddestination'
                 value={destination}
                 onChange={(e) => setDestination(e.target.value)}
               />
@@ -94,6 +103,8 @@ const List = () => {
                     className='lsOptionInput'
                     placeholder={options.adult}
                     min='1'
+                    name='adult'
+                    onChange={handleOptions}
                   />
                 </div>
                 <div className='lsOptionItem'>
@@ -103,6 +114,8 @@ const List = () => {
                     className='lsOptionInput'
                     placeholder={options.children}
                     min='0'
+                    name='children'
+                    onChange={handleOptions}
                   />
                 </div>
                 <div className='lsOptionItem'>
@@ -112,18 +125,24 @@ const List = () => {
                     className='lsOptionInput'
                     placeholder={options.room}
                     min='1'
+                    name='room'
+                    onChange={handleOptions}
                   />
                 </div>
               </div>
             </div>
             <button
-              onClick={() =>
+              onClick={() => {
                 reFetch(
                   `/hotels?city=${destination}&min=${min || 1}&max=${
                     max || 2000
                   }`
                 )
-              }
+                dispatch({
+                  type: 'NEW_SEARCH',
+                  payload: { destination, dates, options },
+                })
+              }}
             >
               Search
             </button>

@@ -35,7 +35,7 @@ const getHotels = asyncHandler(async (req, res) => {
   if (!min || !max) {
     const allHotels = await Hotel.find({
       ...others,
-    }).limit(req.query.limit)
+    }).limit(req.query.limit || 8)
     return res.status(200).json(allHotels)
   }
   const allHotels = await Hotel.find({
@@ -86,13 +86,11 @@ const countByType = asyncHandler(async (req, res) => {
 const getHotelRooms = asyncHandler(async (req, res) => {
   const { id } = req.params
   const hotel = await Hotel.findById(id)
-  if(!hotel) {
+  if (!hotel) {
     res.status(400)
     throw new Error("Sorry Hotel Can't be found")
   }
-  const list = await Promise.all(hotel.rooms.map(room => (
-    Room.findById(room)
-  )))
+  const list = await Promise.all(hotel.rooms.map((room) => Room.findById(room)))
   res.status(200).json(list)
 })
 

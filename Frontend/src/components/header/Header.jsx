@@ -16,19 +16,7 @@ import {
 const Header = ({ type }) => {
   const [openDate, setOpenDate] = useState(false)
   const [openOptions, setOpenOptions] = useState(false)
-  const [destination, setDestination] = useState('')
-  const [options, setOptions] = useState({
-    adult: 1,
-    children: 0,
-    room: 1,
-  })
-  const [dates, setDates] = useState([
-    {
-      startDate: new Date(),
-      endDate: new Date(),
-      key: 'selection',
-    },
-  ])
+
   const navigate = useNavigate()
   const handleOption = (name, operation) => {
     setOptions((prev) => ({
@@ -36,7 +24,15 @@ const Header = ({ type }) => {
       [name]: operation === 'i' ? options[name] + 1 : options[name] - 1,
     }))
   }
-  const { dispatch } = useContext(SearchContext)
+  const {
+    dispatch,
+    options,
+    setOptions,
+    destination,
+    setDestination,
+    dates,
+    setDates,
+  } = useContext(SearchContext)
 
   const handleSearch = () => {
     if (destination === '') {
@@ -44,9 +40,9 @@ const Header = ({ type }) => {
     }
     dispatch({
       type: 'NEW_SEARCH',
-      payload: { city: destination, dates, options },
+      payload: { destination, dates, options },
     })
-    navigate('/hotels', { state: { destination, dates, options } })
+    navigate('/hotels')
   }
 
   return (
@@ -54,7 +50,7 @@ const Header = ({ type }) => {
       <div className='headerContainer'>
         <h1 className='headerTitle'>
           Want To Make Your Life Full? Time for Full{' '}
-          <img className='logoImg' src='./images/logo.png' alt='logo'></img> 
+          <img className='logoImg' src='./images/logo.png' alt='logo'></img>
           Life.{' '}
         </h1>
         <p className='headerDesc'>
