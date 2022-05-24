@@ -46,7 +46,6 @@ const getHotels = asyncHandler(async (req, res) => {
     res.status(404)
     throw new Error('Hotels not found')
   }
-  console.log(req.query)
   res.status(200).json(allHotels)
 })
 //@des count Hotels by city

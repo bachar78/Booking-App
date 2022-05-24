@@ -70,6 +70,25 @@ const updateRoom = asyncHandler(async (req, res) => {
   }
   res.status(200).json(updatedRoom)
 })
+//@des update a Room
+//@route PUT /api/rooms/availability/:id
+//@access Private
+const updateRoomAvailability = asyncHandler(async (req, res) => {
+  const { id } = req.params
+  const updatedRoom = await Room.updateOne(
+    { 'roomNumbers._id': id },
+    {
+      $push: {
+        'roomNumbers.$.unavailableDates': req.body.dates,
+      },
+    }
+  )
+  if (!updatedRoom) {
+    res.status(401)
+    throw new Error('Room not updated ')
+  }
+  res.status(200).json({"message": "updated"})
+})
 
 //@des delete Room
 //@route DELETE /api/rooms/:id
@@ -82,9 +101,16 @@ const deleteRoom = asyncHandler(async (req, res) => {
     throw new Error('Room Can not be deleted')
   }
   await Hotel.findByIdAndUpdate(hotelId, {
-     $pull: { rooms: deletedRoom._id },
-   })
+    $pull: { rooms: deletedRoom._id },
+  })
   res.status(200).json(deletedRoom)
 })
 
-export { createRoom, getRoom, getRooms, updateRoom, deleteRoom }
+export {
+  createRoom,
+  getRoom,
+  getRooms,
+  updateRoom,
+  deleteRoom,
+  updateRoomAvailability,
+}

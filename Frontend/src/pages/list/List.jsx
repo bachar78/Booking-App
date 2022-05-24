@@ -20,8 +20,6 @@ const List = () => {
     setDestination,
     dates,
     setDates,
-    dispatch,
-    state,
   } = useContext(SearchContext)
 
   const { error, data, loading, reFetch } = useFetch(
@@ -101,10 +99,11 @@ const List = () => {
                   <input
                     type='number'
                     className='lsOptionInput'
-                    placeholder={options.adult}
+                    placeholder='Adult(s)'
                     min='1'
                     name='adult'
                     onChange={handleOptions}
+                    value={options.adult}
                   />
                 </div>
                 <div className='lsOptionItem'>
@@ -116,6 +115,7 @@ const List = () => {
                     min='0'
                     name='children'
                     onChange={handleOptions}
+                    value={options.children}
                   />
                 </div>
                 <div className='lsOptionItem'>
@@ -127,6 +127,7 @@ const List = () => {
                     min='1'
                     name='room'
                     onChange={handleOptions}
+                    value={options.room}
                   />
                 </div>
               </div>
@@ -138,10 +139,6 @@ const List = () => {
                     max || 2000
                   }`
                 )
-                dispatch({
-                  type: 'NEW_SEARCH',
-                  payload: { destination, dates, options },
-                })
               }}
             >
               Search

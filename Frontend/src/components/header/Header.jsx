@@ -25,7 +25,6 @@ const Header = ({ type }) => {
     }))
   }
   const {
-    dispatch,
     options,
     setOptions,
     destination,
@@ -38,19 +37,14 @@ const Header = ({ type }) => {
     if (destination === '') {
       return
     }
-    dispatch({
-      type: 'NEW_SEARCH',
-      payload: { destination, dates, options },
-    })
     navigate('/hotels')
   }
-
   return (
     <div className='header'>
       <div className='headerContainer'>
         <h1 className='headerTitle'>
           Want To Make Your Life Full? Time for Full{' '}
-          <img className='logoImg' src='./images/logo.png' alt='logo'></img>
+          <img className='logoImg' src='../images/logo.png' alt='logo'></img>
           Life.{' '}
         </h1>
         <p className='headerDesc'>
