@@ -1,4 +1,3 @@
-import Header from '../../components/header/Header'
 import Navbar from '../../components/navbar/Navbar'
 import { format } from 'date-fns'
 import { useState, useContext } from 'react'
@@ -13,14 +12,9 @@ const List = () => {
   const [openDate, setOpenDate] = useState(false)
   const [min, setMin] = useState(undefined)
   const [max, setMax] = useState(undefined)
-  const {
-    options,
-    setOptions,
-    destination,
-    setDestination,
-    dates,
-    setDates,
-  } = useContext(SearchContext)
+  const [featured, setFeatured] = useState(false)
+  const { options, setOptions, destination, setDestination, dates, setDates } =
+    useContext(SearchContext)
 
   const { error, data, loading, reFetch } = useFetch(
     `/hotels?city=${destination}`
@@ -37,14 +31,14 @@ const List = () => {
   const handleOptions = (e) => {
     setOptions((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
+  console.log(featured)
   return (
     <div>
       <Navbar />
-      <Header type='list' />
       <div className='listContainer'>
         <div className='listWrapper'>
           <div className='listSearch'>
-            <h1 className='lsTitle'>Search</h1>
+            <h1 className='lsTitle'>Modify Your Choices?</h1>
             <div className='lsItem'>
               <label>Destination</label>
               <input
@@ -128,6 +122,17 @@ const List = () => {
                     name='room'
                     onChange={handleOptions}
                     value={options.room}
+                  />
+                </div>
+                <div className='lsOptionItem'>
+                  <span className='lsOptionText'>Featured ?</span>
+                  <input
+                    type='checkbox'
+                    name='featured'
+                    onChange={(e) =>
+                      setFeatured(e.target.checked ? e.target.value : false)
+                    }
+                    value='true'
                   />
                 </div>
               </div>

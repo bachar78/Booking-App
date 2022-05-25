@@ -1,5 +1,5 @@
 import './searchItem.css'
-import { rating } from '../featuredProperties/FeaturedProperties'
+import rating from '../../utils/rating'
 import { Link } from 'react-router-dom'
 const SearchItem = ({ img, hotel }) => {
   return (

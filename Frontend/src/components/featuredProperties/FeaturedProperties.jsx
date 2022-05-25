@@ -1,16 +1,8 @@
 import './featuredProperties.css'
 import useFetch from '../../hooks/useFetch'
-const rating = (num) => {
-  if (num > 1 && num <= 3) {
-    return 'Good'
-  } else if (num > 3 && num <= 5) {
-    return 'Excelent'
-  } else if (num === 1) {
-    return 'Bad'
-  }
-}
+import rating from '../../utils/rating'
 const FeaturedProperties = () => {
-  const { error, loading, data } = useFetch('/hotels?featured=true&limit=4')
+  const { loading, data } = useFetch('/hotels?featured=true&limit=4')
 
   return (
     <div className='fp'>
@@ -81,5 +73,4 @@ const FeaturedProperties = () => {
   )
 }
 
-export { rating }
 export default FeaturedProperties

@@ -5,30 +5,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
 }
-
-.fLists {
-  display: flex;
-  width: 100%;
-  justify-content: space-around;
-  margin-bottom: 4rem;
-  margin-top: 2rem;
-}
-
-.fList {
-  list-style: none;
-  padding: 0;
-}
-
-.fListItem {
-  margin-bottom: 1rem;
-  color: #003580;
-  cursor: pointer;
-}
-
 .fText {
-  margin-bottom: 2rem;
+  margin-bottom: .3rem;
   color: #003580;
   font-weight: bold;
 }
