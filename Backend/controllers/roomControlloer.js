@@ -87,7 +87,7 @@ const updateRoomAvailability = asyncHandler(async (req, res) => {
     res.status(401)
     throw new Error('Room not updated ')
   }
-  res.status(200).json({"message": "updated"})
+  res.status(200).json({"message": "reserved"})
 })
 
 //@des delete Room

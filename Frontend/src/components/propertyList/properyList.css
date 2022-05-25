@@ -11,6 +11,7 @@
   border-radius: 10px;
   overflow: hidden;
   cursor: pointer;
+  position: relative;
 }
 
 .pListItem img {
@@ -19,10 +20,19 @@
   object-fit: cover;
 }
 
-.pListTitle>h1 {
+.pListTitle {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  background-color: rgba(3, 3, 3, 0.6);
+  padding: 0.5rem;
+  color: white;
+}
+
+.pListTitle > h1 {
   font-size: 1.5rem;
 }
-.pListTitle>h2 {
+.pListTitle > h2 {
   font-size: 1.2rem;
   font-weight: lighter;
 }

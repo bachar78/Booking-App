@@ -5,9 +5,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #003580;
 }
 .fText {
-  margin-bottom: .3rem;
-  color: #003580;
+  padding: 1rem;
+  color: white;
   font-weight: bold;
 }

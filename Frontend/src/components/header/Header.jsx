@@ -36,7 +36,7 @@ const Header = () => {
   return (
     <div className='header'>
       <div className='headerContainer'>
-        <h1 className='headerTitle'>Insert your destination and we will find the best options </h1>
+        <h1 className='headerTitle'>Insert your destination and we will find the best options <b>FOR YOU</b> </h1>
         <div className='headerSearch'>
           <div className='headerSearchItem'>
             <FontAwesomeIcon icon={faBed} className='headerIcon' />

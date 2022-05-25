@@ -7,6 +7,7 @@ import './list.css'
 import SearchItem from '../../components/searchItem/SearchItem'
 import useFetch from '../../hooks/useFetch'
 import { Link } from 'react-router-dom'
+import Footer from '../../components/footer/Footer'
 
 const List = () => {
   const [openDate, setOpenDate] = useState(false)
@@ -31,7 +32,6 @@ const List = () => {
   const handleOptions = (e) => {
     setOptions((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
-  console.log(featured)
   return (
     <div>
       <Navbar />
@@ -159,6 +159,7 @@ const List = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   )
 }

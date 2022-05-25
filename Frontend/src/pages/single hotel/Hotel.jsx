@@ -1,8 +1,8 @@
 import './hotel.css'
 import { useState, useContext } from 'react'
 import Navbar from '../../components/navbar/Navbar'
-import Header from '../../components/header/Header'
 import Reserve from '../../components/reserve/Reserve'
+import Confirmation from '../../components/confirmation/Confirmation'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faCircleArrowLeft,
@@ -12,7 +12,6 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import photos from '../../assets/photos'
 import Footer from '../../components/footer/Footer'
-import MailList from '../../components/mailList/MailList'
 import { useParams, useNavigate } from 'react-router-dom'
 import useFetch from '../../hooks/useFetch'
 import { Link } from 'react-router-dom'
@@ -20,11 +19,11 @@ import { SearchContext } from '../../context/SearchContext'
 import { AuthContext } from '../../context/AuthContext'
 import { dayDifference } from '../../utils/dayDifference'
 
+
 const Hotel = () => {
   const navigate = useNavigate()
   const { user } = useContext(AuthContext)
-  const { dates, options, destination } = useContext(SearchContext)
-  
+  const { dates, options, destination, openConfirmation } = useContext(SearchContext)
   const days = dayDifference(dates[0].endDate, dates[0].startDate)
   const { id } = useParams()
   const [slideNumber, setSlideNumber] = useState(0)
@@ -67,7 +66,6 @@ const Hotel = () => {
   return (
     <div className=''>
       <Navbar />
-      <Header type='list' />
       <div className='hotelContainer'>
         {open && (
           <div className='slider'>
@@ -82,11 +80,7 @@ const Hotel = () => {
               onClick={() => slideHandler('left')}
             />
             <div className='sliderWrapper'>
-              <img
-                src={photos[slideNumber].src}
-                alt=''
-                className='sliderImg'
-              />
+              <img src={photos[slideNumber].src} alt='' className='sliderImg' />
             </div>
             <FontAwesomeIcon
               icon={faCircleArrowRight}
@@ -99,11 +93,12 @@ const Hotel = () => {
           ? '...is loading'
           : data && (
               <div className='hotelWrapper'>
-                <button className='bookNow'>Book Now!</button>
                 <h1 className='hotelTitle'>{data.name}</h1>
                 <div className='hotelAddress'>
                   <FontAwesomeIcon icon={faLocationDot} />
-                  <span>{data.address} - {destination}</span>
+                  <span>
+                    {data.address} - {destination}
+                  </span>
                 </div>
                 <span className='hotelDistance'>
                   Excellent location - {data.distance} from center
@@ -114,14 +109,14 @@ const Hotel = () => {
                 </span>
                 <div className='hotelImages'>
                   {photos.map((image, index) => (
-                      <div key={index} className='hotelImgWrapper'>
-                        <img
-                          onClick={() => openHandler(index)}
-                          src={image.src}
-                          alt=''
-                        />
-                      </div>
-                    ))}
+                    <div key={index} className='hotelImgWrapper'>
+                      <img
+                        onClick={() => openHandler(index)}
+                        src={image.src}
+                        alt=''
+                      />
+                    </div>
+                  ))}
                 </div>
                 <div className='hotelDetails'>
                   <div className='hotelDetailsTexts'>
@@ -149,15 +144,15 @@ const Hotel = () => {
                     <h2>
                       $<b>{data.cheapestPrice * days * options.room}</b>
                     </h2>
-                    <button onClick={handleClick}>Reserve or Book Now!</button>
+                    <button onClick={handleClick}>Reserve</button>
                   </div>
                 </div>
               </div>
             )}
       </div>
-      <MailList />
       <Footer />
       {openReserve && <Reserve hotelId={id} setOpenReserve={setOpenReserve} />}
+      {openConfirmation && <Confirmation hotelId={id}/>}
     </div>
   )
 }
