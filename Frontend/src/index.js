@@ -4,13 +4,16 @@ import App from './App'
 import reportWebVitals from './reportWebVitals'
 import { SearchContextProvider as Provider } from './context/SearchContext'
 import { AuthContextProvider as AuthContext } from './context/AuthContext'
+import { OrderContextProvider as OrderContext } from './context/OrderContext'
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <React.StrictMode>
     <Provider>
-      <AuthContext>
-        <App />
-      </AuthContext>
+      <OrderContext>
+        <AuthContext>
+          <App />
+        </AuthContext>
+      </OrderContext>
     </Provider>
   </React.StrictMode>
 )

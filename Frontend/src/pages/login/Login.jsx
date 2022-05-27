@@ -23,7 +23,7 @@ const Login = () => {
       dispatch({ type: 'LOGIN_SUCCESS', payload: res.data })
       navigate(-1)
     } catch (err) {
-      dispatch({ type: 'LOGIN_FAIURE', payload: err.response.data })
+      dispatch({ type: 'LOGIN_FAIURE', payload: err.message })
     }
   }
   useEffect(() => {

@@ -19,11 +19,11 @@ import { SearchContext } from '../../context/SearchContext'
 import { AuthContext } from '../../context/AuthContext'
 import { dayDifference } from '../../utils/dayDifference'
 
-
 const Hotel = () => {
   const navigate = useNavigate()
   const { user } = useContext(AuthContext)
-  const { dates, options, destination, openConfirmation } = useContext(SearchContext)
+  const { dates, options, destination, openConfirmation } =
+    useContext(SearchContext)
   const days = dayDifference(dates[0].endDate, dates[0].startDate)
   const { id } = useParams()
   const [slideNumber, setSlideNumber] = useState(0)
@@ -47,7 +47,13 @@ const Hotel = () => {
     }
   }
   const { data, error, loading } = useFetch(id ? `/hotels/${id}` : '/hotels')
-
+  const handleClick = () => {
+    if (user) {
+      setOpenReserve(true)
+    } else {
+      navigate('/login')
+    }
+  }
   if (error) {
     return (
       <h1 className='error'>
@@ -55,13 +61,6 @@ const Hotel = () => {
         <Link to='/'>Go Back to Home Page</Link>
       </h1>
     )
-  }
-  const handleClick = () => {
-    if (user) {
-      setOpenReserve(true)
-    } else {
-      navigate('/login')
-    }
   }
   return (
     <div className=''>
@@ -152,7 +151,7 @@ const Hotel = () => {
       </div>
       <Footer />
       {openReserve && <Reserve hotelId={id} setOpenReserve={setOpenReserve} />}
-      {openConfirmation && <Confirmation hotelId={id}/>}
+      {openConfirmation && <Confirmation hotelId={id} />}
     </div>
   )
 }

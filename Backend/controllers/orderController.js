@@ -2,12 +2,16 @@ import Order from '../models/Order.js'
 import Room from '../models/roomsModel.js'
 import Hotel from '../models/hotelsModel.js'
 import asyncHandler from 'express-async-handler'
-import hotelsModel from '../models/hotelsModel.js'
+
 
 export const createOrder = asyncHandler(async (req, res) => {
   const { id } = req.params
   const { rooms, dates } = req.body
   const hotel = await Hotel.findById(id)
+  if(!hotel) {
+    res.status(404)
+    throw new Error("Hotel can't be found")
+  }
   const order = await Order.create({
     user: req.user.username,
     startDate: dates.startDate,
@@ -30,6 +34,6 @@ export const createOrder = asyncHandler(async (req, res) => {
     })
   )
   await order.save()
-  console.log(order)
+  
   res.status(200).json(order)
 })

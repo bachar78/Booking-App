@@ -46,7 +46,7 @@ const Reserve = ({ setOpenReserve, hotelId }) => {
       console.log(err.message)
     }
   }
-  console.log(selectedRooms)
+
   return (
     <div className='reserve'>
       <div className='reserveContainer'>
