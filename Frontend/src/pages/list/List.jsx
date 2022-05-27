@@ -10,12 +10,19 @@ import { Link } from 'react-router-dom'
 import Footer from '../../components/footer/Footer'
 
 const List = () => {
-  const [openDate, setOpenDate] = useState(false)
   const [min, setMin] = useState(undefined)
   const [max, setMax] = useState(undefined)
   const [featured, setFeatured] = useState(false)
-  const { options, setOptions, destination, setDestination, dates, setDates } =
-    useContext(SearchContext)
+  const {
+    options,
+    setOptions,
+    destination,
+    setDestination,
+    dates,
+    setDates,
+    openDate,
+    setOpenDate,
+  } = useContext(SearchContext)
 
   const { error, data, loading, reFetch } = useFetch(
     `/hotels?city=${destination}`
@@ -32,6 +39,9 @@ const List = () => {
   const handleOptions = (e) => {
     setOptions((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
+
+  console.log(featured)
+
   return (
     <div>
       <Navbar />
@@ -43,7 +53,7 @@ const List = () => {
               <label>Destination</label>
               <input
                 type='text'
-                placeholder='Insert Ddestination'
+                placeholder='Insert destination'
                 value={destination}
                 onChange={(e) => setDestination(e.target.value)}
               />
@@ -139,11 +149,19 @@ const List = () => {
             </div>
             <button
               onClick={() => {
-                reFetch(
-                  `/hotels?city=${destination}&min=${min || 1}&max=${
-                    max || 2000
-                  }`
-                )
+                if (featured === true) {
+                  reFetch(
+                    `/hotels?city=${destination}&min=${min || 1}&max=${
+                      max || 2000
+                    }&featured=true`
+                  )
+                } else {
+                  reFetch(
+                    `/hotels?city=${destination}&min=${min || 1}&max=${
+                      max || 2000
+                    }`
+                  )
+                }
               }}
             >
               Search

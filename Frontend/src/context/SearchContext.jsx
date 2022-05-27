@@ -3,6 +3,7 @@ import { createContext, useState } from 'react'
 export const SearchContext = createContext()
 
 export const SearchContextProvider = ({ children }) => {
+  const [openDate, setOpenDate] = useState(false)
   const [selectedRooms, setSelectedRooms] = useState([])
   const [destination, setDestination] = useState('')
   const [openConfirmation, setOpenConfirmation] = useState(false)
@@ -31,6 +32,8 @@ export const SearchContextProvider = ({ children }) => {
         setSelectedRooms,
         openConfirmation,
         setOpenConfirmation,
+        openDate,
+        setOpenDate
       }}
     >
       {children}

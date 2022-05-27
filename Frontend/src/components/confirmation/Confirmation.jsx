@@ -6,8 +6,13 @@ import { OrderContext } from '../../context/OrderContext'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 const Confirmation = ({ hotelId }) => {
-  const { selectedRooms, setSelectedRooms, dates, setOpenConfirmation } =
-    useContext(SearchContext)
+  const {
+    selectedRooms,
+    setSelectedRooms,
+    dates,
+    setOpenConfirmation,
+    setOpenDate
+  } = useContext(SearchContext)
   const { order, error, loading, dispatch } = useContext(OrderContext)
 
   const navigate = useNavigate()
@@ -32,17 +37,20 @@ const Confirmation = ({ hotelId }) => {
         dispatch({ type: 'ORDER_SUCCESS', payload: res.data })
         setSelectedRooms([])
       } catch (err) {
-        dispatch({ type: 'ORDER_FAILURE', payload: err.message })
+        dispatch({ type: 'ORDER_FAILURE', payload: err.response.data })
       }
     })()
   }, [dates, hotelId, setSelectedRooms])
 
   if (error) {
     return (
-      <h1 className='error'>
-        Some thing went wrong <span>{error?.message}</span>
-        <Link to='/'>Go Back to Home Page</Link>
-      </h1>
+      <div className='error'>
+        <h1>
+          <span>{error?.message}</span>
+          <Link to='/hotels'>Reserve at least one night</Link>
+          {setOpenDate(true)}
+        </h1>
+      </div>
     )
   }
   return (

@@ -22,14 +22,24 @@ body {
 }
 
 .error {
+  position: fixed;
+  top: 0;
+  left: 0;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  width: 100%;
+  background-color: rgba(47, 45, 45, 0.851);
+}
+.error h1 {
+  text-align: center;
+  padding: 4rem;
+  background-color: white;
 }
 .error span {
   color: red;
+  display: block;
 }
 /* html {
   font-size: 62.5%;

@@ -47,6 +47,7 @@ const Hotel = () => {
     }
   }
   const { data, error, loading } = useFetch(id ? `/hotels/${id}` : '/hotels')
+
   const handleClick = () => {
     if (user) {
       setOpenReserve(true)

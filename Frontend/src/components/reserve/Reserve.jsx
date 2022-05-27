@@ -8,10 +8,8 @@ import { SearchContext } from '../../context/SearchContext'
 import getDatesInRange from '../../utils/getDatesInRange'
 const Reserve = ({ setOpenReserve, hotelId }) => {
   const { data, loading, error } = useFetch(`/hotels/rooms/${hotelId}`)
-
   const { dates, selectedRooms, setSelectedRooms, setOpenConfirmation } =
     useContext(SearchContext)
-
   const handleSelect = (e) => {
     const checked = e.target.checked
     const value = e.target.value
