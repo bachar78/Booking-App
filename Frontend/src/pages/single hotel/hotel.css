@@ -30,6 +30,7 @@
 }
 .hotelTitle {
   font-size: 2.4rem;
+  color: #555;
 }
 .hotelAddress {
   font-size: 1rem;
@@ -63,33 +64,27 @@
   justify-content: space-between;
   align-items: center;
   gap: 2rem;
-  margin-top: 1rem;
 }
 .hotelDetailsTexts {
   flex: 3;
+  padding: 1rem 3rem 2rem 0;
 }
 .hotelDesc {
   font-size: 1.2rem;
   margin-top: 1.6rem;
+  text-align: justify;
 }
 .hotelDetailsPrice {
   flex: 1;
-  background-color: #ebf3ff;
-  padding: 1.8rem;
   display: flex;
-  flex-direction: column;
-  gap: 1.8rem;
+  justify-content: center;
+  align-items: center;
 }
 .hotelDetailsPrice > h1 {
   font-size: 1.5rem;
   color: #555;
 }
-.hotelDetailsPrice > span {
-  font-size: 1.1rem;
-}
-.hotelDetailsPrice > h2 {
-  font-weight: 300;
-}
+
 .hotelDetailsPrice > button {
   border: none;
   padding: 0.8rem 1.8rem;
@@ -139,4 +134,11 @@
   color: white;
   margin: 3rem;
   cursor: pointer;
+}
+
+.anavailable {
+  font-size: .8rem;
+  font-weight: 500;
+  color: red;
+
 }

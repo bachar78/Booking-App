@@ -2,7 +2,7 @@ import Order from '../models/Order.js'
 import Room from '../models/roomsModel.js'
 import Hotel from '../models/hotelsModel.js'
 import asyncHandler from 'express-async-handler'
-
+import nodemailer from 'nodemailer'
 export const createOrder = asyncHandler(async (req, res) => {
   const { id } = req.params
   const { rooms, dates } = req.body
@@ -17,8 +17,8 @@ export const createOrder = asyncHandler(async (req, res) => {
   }
   const order = await Order.create({
     user: req.user.username,
-    startDate: dates.startDate,
-    endDate: dates.endDate,
+    startDate: dates[0].startDate,
+    endDate: dates[0].endDate,
   })
   if (!order) {
     res.status(404)
@@ -28,6 +28,7 @@ export const createOrder = asyncHandler(async (req, res) => {
   order.hotel.name = hotel.name
   order.hotel.address = hotel.address
   order.hotel.city = hotel.city
+  order.hotel.type = hotel.type
   await order.save()
   order.rooms = await Promise.all(
     rooms.map(async (room) => {
@@ -44,6 +45,5 @@ export const createOrder = asyncHandler(async (req, res) => {
     })
   )
   await order.save()
-
   res.status(200).json(order)
 })

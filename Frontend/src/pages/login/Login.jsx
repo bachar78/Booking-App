@@ -35,7 +35,6 @@ const Login = () => {
   return (
     <>
       <Navbar />
-      <Header type='list' />
       <div className='login'>
         <h1 className='logTitle'>Login</h1>
         <form onSubmit={handleClick} className='logForm'>

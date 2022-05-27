@@ -12,6 +12,7 @@ import Footer from '../../components/footer/Footer'
 const List = () => {
   const [min, setMin] = useState(undefined)
   const [max, setMax] = useState(undefined)
+  const [openDate, setOpenDate] = useState(false)
   const [featured, setFeatured] = useState(false)
   const {
     options,
@@ -20,8 +21,6 @@ const List = () => {
     setDestination,
     dates,
     setDates,
-    openDate,
-    setOpenDate,
   } = useContext(SearchContext)
 
   const { error, data, loading, reFetch } = useFetch(
@@ -40,7 +39,6 @@ const List = () => {
     setOptions((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
-  console.log(featured)
 
   return (
     <div>
@@ -149,7 +147,7 @@ const List = () => {
             </div>
             <button
               onClick={() => {
-                if (featured === true) {
+                if (featured) {
                   reFetch(
                     `/hotels?city=${destination}&min=${min || 1}&max=${
                       max || 2000

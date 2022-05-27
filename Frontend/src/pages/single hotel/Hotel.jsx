@@ -17,14 +17,13 @@ import useFetch from '../../hooks/useFetch'
 import { Link } from 'react-router-dom'
 import { SearchContext } from '../../context/SearchContext'
 import { AuthContext } from '../../context/AuthContext'
-import { dayDifference } from '../../utils/dayDifference'
+
 
 const Hotel = () => {
   const navigate = useNavigate()
   const { user } = useContext(AuthContext)
-  const { dates, options, destination, openConfirmation } =
-    useContext(SearchContext)
-  const days = dayDifference(dates[0].endDate, dates[0].startDate)
+  const { destination } = useContext(SearchContext)
+  const [confirmationOpen, setConfirmationOpen] = useState(false)
   const { id } = useParams()
   const [slideNumber, setSlideNumber] = useState(0)
   const [open, setOpen] = useState(false)
@@ -132,18 +131,6 @@ const Hotel = () => {
                     </p>
                   </div>
                   <div className='hotelDetailsPrice'>
-                    <h1>Perfect for a {days}-night stay!</h1>
-                    <span>
-                      Located in the real heart of Krakow, this property has an
-                      excellent location score of 9.8!
-                    </span>
-                    <h2>
-                      $<b>{data.cheapestPrice}</b> * <b>{days}</b> night *{' '}
-                      <b>{options.room}</b> room(s)
-                    </h2>
-                    <h2>
-                      $<b>{data.cheapestPrice * days * options.room}</b>
-                    </h2>
                     <button onClick={handleClick}>Reserve</button>
                   </div>
                 </div>
@@ -151,8 +138,16 @@ const Hotel = () => {
             )}
       </div>
       <Footer />
-      {openReserve && <Reserve hotelId={id} setOpenReserve={setOpenReserve} />}
-      {openConfirmation && <Confirmation hotelId={id} />}
+      {openReserve && (
+        <Reserve
+          hotelId={id}
+          setOpenReserve={setOpenReserve}
+          setConfirmationOpen={setConfirmationOpen}
+        />
+      )}
+      {confirmationOpen && (
+        <Confirmation setOpenConfirmation={setConfirmationOpen} hotelId={id} />
+      )}
     </div>
   )
 }

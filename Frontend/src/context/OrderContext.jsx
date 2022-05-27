@@ -1,7 +1,7 @@
 import { createContext, useEffect, useReducer } from 'react'
 
 const INITIAL_STATE = {
-  order: {},
+  order: null,
   loading: false,
   error: null,
 }
@@ -10,12 +10,6 @@ export const OrderContext = createContext(INITIAL_STATE)
 
 const OrderReducer = (state, action) => {
   switch (action.type) {
-    case 'ORDER_START':
-      return {
-        order: null,
-        loading: true,
-        error: null,
-      }
     case 'ORDER_SUCCESS':
       return {
         order: action.payload,
@@ -24,7 +18,7 @@ const OrderReducer = (state, action) => {
       }
     case 'ORDER_FAILURE':
       return {
-        order: {},
+        order: null,
         loading: false,
         error: action.payload,
       }

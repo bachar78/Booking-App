@@ -10,6 +10,7 @@ const orderSchema = new Schema(
       },
       address: { type: String },
       city: { type: String },
+      type: { type: String },
     },
     rooms: [
       {

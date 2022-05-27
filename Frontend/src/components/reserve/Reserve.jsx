@@ -2,14 +2,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleXmark } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
 import useFetch from '../../hooks/useFetch'
+
 import './reserve.css'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { SearchContext } from '../../context/SearchContext'
 import getDatesInRange from '../../utils/getDatesInRange'
-const Reserve = ({ setOpenReserve, hotelId }) => {
+const Reserve = ({ setOpenReserve, hotelId, setConfirmationOpen }) => {
   const { data, loading, error } = useFetch(`/hotels/rooms/${hotelId}`)
-  const { dates, selectedRooms, setSelectedRooms, setOpenConfirmation } =
-    useContext(SearchContext)
+  const { dates, selectedRooms, setSelectedRooms } = useContext(SearchContext)
   const handleSelect = (e) => {
     const checked = e.target.checked
     const value = e.target.value
@@ -35,9 +35,10 @@ const Reserve = ({ setOpenReserve, hotelId }) => {
             dates: allDates,
           })
           if (res.data.message === 'reserved') {
+            setConfirmationOpen(true)
             setOpenReserve(false)
-            setOpenConfirmation(true)
           }
+          
         })
       )
     } catch (err) {
@@ -72,12 +73,15 @@ const Reserve = ({ setOpenReserve, hotelId }) => {
             {room.roomNumbers.map((roomNumber) => (
               <div className='room' key={roomNumber._id}>
                 <label htmlFor=''>{roomNumber.number}</label>
-                <input
-                  type='checkbox'
-                  value={[roomNumber._id, roomNumber.number]}
-                  onChange={handleSelect}
-                  disabled={!isAvailable(roomNumber)}
-                />
+                {
+                  !isAvailable(roomNumber) ? <p className='anavailable'>Not Available</p> :(
+                    <input
+                      type='checkbox'
+                      value={[roomNumber._id, roomNumber.number]}
+                      onChange={handleSelect}
+                    />
+                  )
+                }
               </div>
             ))}
           </div>
