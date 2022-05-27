@@ -3,7 +3,7 @@ import { faCircleXmark } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
 import useFetch from '../../hooks/useFetch'
 import './reserve.css'
-import {  useContext } from 'react'
+import { useContext } from 'react'
 import { SearchContext } from '../../context/SearchContext'
 import getDatesInRange from '../../utils/getDatesInRange'
 const Reserve = ({ setOpenReserve, hotelId }) => {
@@ -32,7 +32,8 @@ const Reserve = ({ setOpenReserve, hotelId }) => {
     try {
       await Promise.all(
         selectedRooms.map(async (roomId) => {
-          const res = await axios.put(`/rooms/availability/${roomId}`, {
+          const id = roomId.split(',')[0]
+          const res = await axios.put(`/rooms/availability/${id}`, {
             dates: allDates,
           })
           if (res.data.message === 'reserved') {
@@ -45,14 +46,17 @@ const Reserve = ({ setOpenReserve, hotelId }) => {
       console.log(err.message)
     }
   }
-console.log(selectedRooms.toString())
+  console.log(selectedRooms)
   return (
     <div className='reserve'>
       <div className='reserveContainer'>
         <FontAwesomeIcon
           icon={faCircleXmark}
           className='reserveClose'
-          onClick={() => setOpenReserve(false)}
+          onClick={() => {
+            setOpenReserve(false)
+            setSelectedRooms([])
+          }}
         />
         <span>Select you rooms: </span>
         {data.map((room) => (
@@ -72,7 +76,7 @@ console.log(selectedRooms.toString())
                 <label htmlFor=''>{roomNumber.number}</label>
                 <input
                   type='checkbox'
-                  value={roomNumber._id}
+                  value={[roomNumber._id, roomNumber.number]}
                   onChange={handleSelect}
                   disabled={!isAvailable(roomNumber)}
                 />

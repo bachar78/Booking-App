@@ -3,12 +3,21 @@ const { Schema } = mongoose
 
 const orderSchema = new Schema(
   {
-    user_id: { type: mongoose.SchemaTypes.ObjectId, ref: 'User' },
-    hotel: [{ type: mongoose.SchemaTypes.ObjectId, ref: 'Hotel' }],
-    rooms: [{ type: mongoose.SchemaTypes.ObjectId, ref: 'Room' }],
-    price: {
-      type: Number,
+    user: { type: String },
+    hotel: {
+      name: {
+        type: String,
+      },
+      address: { type: String },
+      city: { type: String },
     },
+    rooms: [
+      {
+        number: { type: Number },
+        desc: { type: String },
+        price: { type: Number },
+      },
+    ],
     startDate: { type: Date },
     endDate: { type: Date },
     is_paid: {
