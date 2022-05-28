@@ -19,8 +19,8 @@ const orderSchema = new Schema(
         price: { type: Number },
       },
     ],
-    startDate: { type: Date },
-    endDate: { type: Date },
+    startDate: { type: String },
+    endDate: { type: String },
     is_paid: {
       type: Boolean,
       default: false,

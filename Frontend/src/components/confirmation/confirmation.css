@@ -1,0 +1,60 @@
+.order {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.418);
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.orderContainer {
+  max-width: 100rem;
+  height: 80%;
+  background-color: white;
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.orderName {
+  font-weight: lighter;
+}
+
+.orderName span {
+  font-weight: bold;
+  color: red;
+}
+
+.orderDetails {
+  font-weight: lighter;
+}
+
+.orderDetails span {
+  font-weight: bold;
+}
+
+.orderRooms {
+  display: flex;
+  justify-content: space-evenly;
+  list-style: none;
+  align-items: center;
+  width: 100%;
+}
+
+
+.totalPay {
+}
+
+.accommodation {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  text-align: center;
+  font-weight: lighter;
+  margin-bottom: 2rem;
+}

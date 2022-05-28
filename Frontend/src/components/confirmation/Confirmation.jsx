@@ -16,17 +16,22 @@ const Confirmation = ({ hotelId, setOpenConfirmation }) => {
     setOpenConfirmation(false)
     navigate('/')
   }
+  const formedDates = {
+    startDate: format(dates[0].startDate, 'dd/MM/yy'),
+    endDate: format(dates[0].endDate, 'dd/MM/yy'),
+  }
+
+  const newSelectedRoom = selectedRooms.map((room) => ({
+    id: room.split(',')[0],
+    number: room.split(',')[1],
+  }))
 
   useEffect(() => {
     ;(async () => {
-      const newSelectedRoom = selectedRooms.map((room) => ({
-        id: room.split(',')[0],
-        number: room.split(',')[1],
-      }))
       try {
         const res = await axios.post(`/rooms/confirmation/${hotelId}`, {
           rooms: newSelectedRoom,
-          dates,
+          dates: formedDates,
         })
         dispatch({ type: 'ORDER_SUCCESS', payload: res.data })
         setSelectedRooms([])
@@ -34,7 +39,7 @@ const Confirmation = ({ hotelId, setOpenConfirmation }) => {
         dispatch({ type: 'ORDER_FAILURE', payload: err.response.data })
       }
     })()
-  }, [dates, hotelId, setSelectedRooms])
+  }, [])
 
   if (error) {
     return (
@@ -46,46 +51,57 @@ const Confirmation = ({ hotelId, setOpenConfirmation }) => {
       </div>
     )
   }
-  console.log(order)
+
   return (
     order && (
-      <div className='reserve'>
-        <div className='reserveContainer'>
+      <div className='order'>
+        <div className='orderContainer'>
           <h2 className='orderName'>
-            Thank you mr(s) <span>{order.user}</span> for choosing Full Life for
-            your booking
+            Thank you mr(s) <span>{order.user}</span> for choosing{' '}
+            <b>Full Life</b> for your booking
           </h2>
-          <p className='orderDetails'>
-            You have just reserved in {order.hotel.name}-{order.hotel.type} in{' '}
-            {order.hotel.address}-{order.hotel.city}
-          </p>
-          <h2>You Reservation is:</h2>
+          <h3 className='orderDetails'>
+            You have just reserved in{' '}
+            <span>
+              {order.hotel.name}-{order.hotel.type}
+            </span>{' '}
+            in{' '}
+            <span>
+              {order.hotel.address}-{order.hotel.city}
+            </span>
+          </h3>
+          <h2>Your Reservation:</h2>
           {order.rooms.map((room) => (
-            <ul className='orderDetails' key={room.number}>
+            <ul className='orderRooms' key={room.number}>
               <li>
-                Room Number: <span>{room.number}</span>
+                <b>Room:</b> {room.number}
               </li>
+              <li>{room.desc}</li>
               <li>
-                <span>{room.desc}</span>
-              </li>
-              <li>
-                <span>
-                  ${room.price} a night * {days} night(s) = {room.price * days}
-                </span>
+                ${room.price} a night * {days} night(s) = {room.price * days}
               </li>
             </ul>
           ))}
-          <h2>
-            Total to pay is: ${' '}
-            {order.rooms.reduce(
-              (previousValue, currentValue) =>
-                previousValue + currentValue.price,
-              0
-            ) * days}
+          <h2 className='totalPay'>
+            <b style={{ margin: '1rem' }}>Total to Pay:</b>
+            <span>
+              $
+              {order.rooms.reduce(
+                (previousValue, currentValue) =>
+                  previousValue + currentValue.price,
+                0
+              ) * days}
+            </span>
           </h2>
-          Your accommodation in {order.hotel.name} will be from
-          {format(dates[0].startDate, 'dd/MM/yy')} to
-          {format(dates[0].endDate, 'dd/MM/yy')}
+          <h2 className='accommodation'>
+            Your accommodation in <b>{order.hotel.name}</b> will be{' '}
+            <span>
+              <b style={{ color: 'red', margin: '1rem' }}>From</b>
+              {format(dates[0].startDate, 'dd/MM/yy')}
+              <b style={{ color: 'red', margin: '1rem' }}>To</b>
+              {format(dates[0].endDate, 'dd/MM/yy')}
+            </span>
+          </h2>
           <button onClick={handleClick} className='reserveButton'>
             Close and go to home page{' '}
           </button>
