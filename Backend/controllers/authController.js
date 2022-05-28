@@ -31,7 +31,20 @@ const register = asyncHandler(async (req, res) => {
     res.status(401)
     throw new Error('User can not be resgisterd')
   }
-  res.status(201).json(newUser)
+  const token = jwt.sign(
+    { id: newUser._id, isAdmin: newUser.isAdmin },
+    process.env.JWT_SECRET
+  )
+  res
+    .cookie('access_token', token, {
+      httpOnly: true,
+    })
+    .status(200)
+    .json({
+      _id: newUser._id,
+      username: newUser.username,
+      email: newUser.email,
+    })
 })
 
 //@des Login a user
@@ -52,10 +65,13 @@ const login = asyncHandler(async (req, res) => {
       process.env.JWT_SECRET
     )
     const { password, isAdmin, ...otherDetails } = user._doc
-    
-    res.cookie('access_token', token, {
+
+    res
+      .cookie('access_token', token, {
         httpOnly: true,
-      }).status(200).json({
+      })
+      .status(200)
+      .json({
         ...otherDetails,
       })
   } else {

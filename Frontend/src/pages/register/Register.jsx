@@ -1,13 +1,12 @@
 import { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../../context/AuthContext'
 import Navbar from '../../components/navbar/Navbar'
-import Header from '../../components/header/Header'
-import './login.css'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-const Login = () => {
+const Register = () => {
   const [credentials, setCredentials] = useState({
     username: undefined,
+    email: undefined,
     password: undefined,
   })
   const navigate = useNavigate()
@@ -17,11 +16,10 @@ const Login = () => {
   }
   const handleClick = async (e) => {
     e.preventDefault()
-    dispatch({ type: 'LOGIN_START' })
     try {
-      const res = await axios.post('/auth/login', credentials)
+      const res = await axios.post('/auth/register', credentials)
       dispatch({ type: 'LOGIN_SUCCESS', payload: res.data })
-      navigate(-1)
+      navigate('/')
     } catch (err) {
       dispatch({ type: 'LOGIN_FAIURE', payload: err.response.data })
     }
@@ -50,6 +48,17 @@ const Login = () => {
             />
           </div>
           <div className='logElement'>
+            <label htmlFor='username'>Insert you Email</label>
+            <input
+              type='email'
+              id='email'
+              name='email'
+              placeholder='email'
+              onChange={handleChange}
+              className='logInput'
+            />
+          </div>
+          <div className='logElement'>
             <label htmlFor='password'>Insert your Password</label>
             <input
               type='password'
@@ -60,7 +69,7 @@ const Login = () => {
               className='logInput'
             />
           </div>
-          <button className='logButton'>Login</button>
+          <button className='logButton'>Register</button>
           {error && <span className='logError'>{error.message}</span>}
         </form>
       </div>
@@ -68,4 +77,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default Register
