@@ -3,7 +3,7 @@ import useFetch from '../../hooks/useFetch'
 
 const Featured = () => {
   const { data, error, loading } = useFetch(
-    '/hotels/countbycity?cities=Dublin,Rio de Janeiro,Buenos Aires'
+    '/hotels/countbycity?cities=Amsterdam,Utrecht,Den Haag'
   )
   if(error) {
     return <p>{error.message}</p>

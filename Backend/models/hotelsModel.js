@@ -19,6 +19,10 @@ const hotelSchema = new Schema(
       type: String,
       required: true,
     },
+    phone_number: {
+      type: String,
+      required: true,
+    },
     distance: {
       type: String,
       required: true,
