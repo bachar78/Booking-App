@@ -8,7 +8,7 @@ const SearchItem = ({ img, hotel }) => {
       <div className='siDesc'>
         <div className='siDesc'>
           <h1 className='siTitle'>{hotel.name}</h1>
-          <span className='siDistance'> {hotel.distance} from center</span>
+          <span className='siDistance'> {hotel.distance}km from center</span>
           <span className='siTaxiOp'>Free airport taxi</span>
           <span className='siSubtitle'>{hotel.desc}</span>
           <span className='siFeatures'>

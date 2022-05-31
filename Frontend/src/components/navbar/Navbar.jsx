@@ -18,7 +18,7 @@ const Navbar = () => {
           Life
         </span>
         <div className='navItems'>
-          {user !== null ? (
+          {user !== null ? (         
             <>
               <button onClick={logoutHandler} className='navButton'>
                 Logout
