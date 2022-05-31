@@ -85,6 +85,10 @@ input[type=checkbox] {
   .reserveContainer {
     padding: 0 .5rem;
   }
+  .room {
+     width: 20%;
+     margin-bottom: 1rem;
+  }
   .roomItem {
     margin-top: 1rem;
     padding: 2rem 0;
