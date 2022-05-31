@@ -38,7 +38,7 @@
   padding: 2rem 0;
   border-radius: 5px;
   width: 100%;
-  max-width: 102.4rem;
+  max-width: 100rem;
   z-index: 2;
   position: relative;
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
@@ -111,4 +111,35 @@
 .optionCounterButton:disabled {
   cursor: not-allowed;
   background-color: rgba(128, 128, 128, 0.2);
+}
+
+@media only screen and (max-width: 1600px) {
+  .headerSearch {
+    width: 95%;
+  }
+}
+
+@media only screen and (max-width: 600px)  {
+  .headerTitle {
+    text-align: center;
+    padding: 0 1rem;
+  }
+  .headerSearch {
+    padding: 1rem;
+    flex-direction: column;
+    height: 25vh;
+    width: 95%;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 1rem;
+    font-size: 1rem;
+  }
+  .headerSearchItem {
+    width: 100%;
+    margin-top: .5rem;
+  }
+  .headerBtn {
+    padding: .5rem;
+    width: 100%;
+  }
 }
