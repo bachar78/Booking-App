@@ -36,3 +36,29 @@
   font-size: 1.2rem;
   font-weight: lighter;
 }
+
+@media only screen and (max-width: 1600px) {
+  .pList {
+    width: 95%;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .pList {
+    flex-wrap: wrap;
+  }
+  .pListItem {
+    margin: 0 1rem;
+    flex: 1 1 15rem;
+  }
+  
+}
+@media only screen and (max-width: 600px) {
+  .featured {
+    flex-wrap: wrap;
+  }
+  .featuredItem {
+    margin: 0 1rem;
+  }
+  
+}

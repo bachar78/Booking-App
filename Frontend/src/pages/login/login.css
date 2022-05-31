@@ -48,7 +48,7 @@
   color: rgb(51, 51, 51);
   font-size: 1.3rem;
 }
-::placeholder {
+.logElement > input::placeholder {
   color: rgb(224, 221, 238);
   font-size: 1.3rem;
 }

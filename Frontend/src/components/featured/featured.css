@@ -27,3 +27,29 @@
   height: 100%;
   object-fit: cover;
 }
+
+@media only screen and (max-width: 1600px) {
+  .featured {
+    width: 95%;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .featured {
+    flex-wrap: wrap;
+  }
+  .featuredItem {
+    margin: 0 1rem;
+    flex: 1 1 20rem;
+  }
+  
+}
+@media only screen and (max-width: 600px) {
+  .featured {
+    flex-wrap: wrap;
+  }
+  .featuredItem {
+    margin: 0 1rem;
+  }
+  
+}

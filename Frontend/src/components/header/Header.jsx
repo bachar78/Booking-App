@@ -12,6 +12,7 @@ import {
   faCalendarDays,
   faPerson,
 } from '@fortawesome/free-solid-svg-icons'
+import capitalizeFirstLetter from '../../utils/capitale'
 
 const Header = () => {
   const [openDate, setOpenDate] = useState(false)
@@ -36,15 +37,20 @@ const Header = () => {
   return (
     <div className='header'>
       <div className='headerContainer'>
-        <h1 className='headerTitle'>Insert your destination and we will find the best options <b>FOR YOU</b> </h1>
+        <h1 className='headerTitle'>
+          Insert your destination and we will find the best options{' '}
+          <b>FOR YOU</b>{' '}
+        </h1>
         <div className='headerSearch'>
           <div className='headerSearchItem'>
             <FontAwesomeIcon icon={faBed} className='headerIcon' />
             <input
               type='text'
-              placeholder='Insert Destination'
+              placeholder='Insert destination'
               className='headerSearchInput'
-              onChange={(e) => setDestination(e.target.value)}
+              onChange={(e) =>
+                setDestination(capitalizeFirstLetter(e.target.value))
+              }
             />
           </div>
           <div className='headerSearchItem'>
@@ -57,7 +63,7 @@ const Header = () => {
               onClick={() => setOpenDate(!openDate)}
               className='headerSearchText'
             >
-              Click here to define the dates
+              Define dates
             </span>
             {openDate && (
               <DateRange
@@ -70,7 +76,7 @@ const Header = () => {
               />
             )}
           </div>
-          <div className='headerSearchItem'>
+          {/* <div className='headerSearchItem'>
             <FontAwesomeIcon icon={faPerson} className='headerIcon' />
             <span
               onClick={() => setOpenOptions(!openOptions)}
@@ -139,7 +145,7 @@ const Header = () => {
                 </div>
               </div>
             )}
-          </div>
+          </div> */}
           <div className='headerSearchItem'>
             <button className='headerBtn' onClick={handleSearch}>
               Search

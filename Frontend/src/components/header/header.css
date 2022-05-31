@@ -65,7 +65,10 @@
   color: lightgray;
   cursor: pointer;
 }
-
+.headerSearch input::placeholder {
+  color: lightgray;
+  cursor: pointer;
+}
 .date {
   position: absolute;
   top: 4rem;
@@ -118,25 +121,38 @@
     width: 95%;
   }
 }
-
-@media only screen and (max-width: 600px)  {
+@media only screen and (max-width: 1200px) {
+  .headerSearch {
+    font-size: 1rem;
+  }
+}
+@media only screen and (max-width: 900px) {
   .headerTitle {
     text-align: center;
     padding: 0 1rem;
+    font-size: 1rem;
   }
+  .headerBtn {
+    padding: .5rem;
+  }
+}
+
+@media only screen and (max-width: 600px)  {
+  
   .headerSearch {
     padding: 1rem;
     flex-direction: column;
-    height: 25vh;
+    height: max-content;
     width: 95%;
     justify-content: space-between;
     align-items: flex-start;
     margin-top: 1rem;
     font-size: 1rem;
+    border: 2px solid #0071c2;
   }
   .headerSearchItem {
     width: 100%;
-    margin-top: .5rem;
+    margin:.8rem 0;
   }
   .headerBtn {
     padding: .5rem;
