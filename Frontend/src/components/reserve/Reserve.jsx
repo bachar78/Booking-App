@@ -38,7 +38,6 @@ const Reserve = ({ setOpenReserve, hotelId, setConfirmationOpen }) => {
             setConfirmationOpen(true)
             setOpenReserve(false)
           }
-          
         })
       )
     } catch (err) {
@@ -57,33 +56,34 @@ const Reserve = ({ setOpenReserve, hotelId, setConfirmationOpen }) => {
             setSelectedRooms([])
           }}
         />
-        <span>Select you rooms: </span>
         {data.map((room) => (
           <div className='roomItem' key={room._id}>
             <div className='roomInformation'>
               <div className='roomTitle'>{room.title}</div>
               <div className='roomDesc'>{room.desc}</div>
               <div className='roomMax'>
-                Max People: <b>{room.maxPeople}</b>
+                <b>Max: </b>{room.maxPeople} person(s)
               </div>
               <div className='roomPrice'>
                 $ <b>{room.price}</b>
               </div>
             </div>
-            {room.roomNumbers.map((roomNumber) => (
-              <div className='room' key={roomNumber._id}>
-                <label htmlFor=''>{roomNumber.number}</label>
-                {
-                  !isAvailable(roomNumber) ? <p className='anavailable'>Not Available</p> :(
+            <div className='roomNumbers'>
+              {room.roomNumbers.map((roomNumber) => (
+                <div className='room' key={roomNumber._id}>
+                  <label htmlFor=''>{roomNumber.number}</label>
+                  {!isAvailable(roomNumber) ? (
+                    <p className='anavailable'>Not Available</p>
+                  ) : (
                     <input
                       type='checkbox'
                       value={[roomNumber._id, roomNumber.number]}
                       onChange={handleSelect}
                     />
-                  )
-                }
-              </div>
-            ))}
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
         ))}
         <button onClick={handleClick} className='reserveButton'>
