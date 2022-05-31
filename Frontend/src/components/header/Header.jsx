@@ -7,24 +7,20 @@ import 'react-date-range/dist/theme/default.css' //? theme css file
 // import { format } from 'date-fns'
 import { useNavigate } from 'react-router-dom'
 import { SearchContext } from '../../context/SearchContext'
-import {
-  faBed,
-  faCalendarDays,
-  faPerson,
-} from '@fortawesome/free-solid-svg-icons'
+import { faBed, faCalendarDays } from '@fortawesome/free-solid-svg-icons'
 import capitalizeFirstLetter from '../../utils/capitale'
 
 const Header = () => {
   const [openDate, setOpenDate] = useState(false)
-  const [openOptions, setOpenOptions] = useState(false)
+  // const [openOptions, setOpenOptions] = useState(false)
 
   const navigate = useNavigate()
-  const handleOption = (name, operation) => {
-    setOptions((prev) => ({
-      ...prev,
-      [name]: operation === 'i' ? options[name] + 1 : options[name] - 1,
-    }))
-  }
+  // const handleOption = (name, operation) => {
+  //   setOptions((prev) => ({
+  //     ...prev,
+  //     [name]: operation === 'i' ? options[name] + 1 : options[name] - 1,
+  //   }))
+  // }
   const { options, setOptions, destination, setDestination, dates, setDates } =
     useContext(SearchContext)
 

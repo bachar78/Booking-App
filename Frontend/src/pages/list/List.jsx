@@ -8,20 +8,15 @@ import SearchItem from '../../components/searchItem/SearchItem'
 import useFetch from '../../hooks/useFetch'
 import { Link } from 'react-router-dom'
 import Footer from '../../components/footer/Footer'
+import capitalizeFirstLetter from '../../utils/capitale'
 
 const List = () => {
   const [min, setMin] = useState(undefined)
   const [max, setMax] = useState(undefined)
   const [openDate, setOpenDate] = useState(false)
   const [featured, setFeatured] = useState(false)
-  const {
-    options,
-    setOptions,
-    destination,
-    setDestination,
-    dates,
-    setDates,
-  } = useContext(SearchContext)
+  const { options, setOptions, destination, setDestination, dates, setDates } =
+    useContext(SearchContext)
 
   const { error, data, loading, reFetch } = useFetch(
     `/hotels?city=${destination}`
@@ -39,7 +34,6 @@ const List = () => {
     setOptions((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
-
   return (
     <div>
       <Navbar />
@@ -53,7 +47,9 @@ const List = () => {
                 type='text'
                 placeholder='Insert destination'
                 value={destination}
-                onChange={(e) => setDestination(e.target.value)}
+                onChange={(e) =>
+                  setDestination(capitalizeFirstLetter(e.target.value))
+                }
               />
             </div>
             <div className='lsItem'>
@@ -147,6 +143,9 @@ const List = () => {
             </div>
             <button
               onClick={() => {
+                if (!destination || dates.startDate === dates.endDate) {
+                  return
+                }
                 if (featured) {
                   reFetch(
                     `/hotels?city=${destination}&min=${min || 1}&max=${

@@ -98,3 +98,25 @@
   cursor: pointer;
   border-radius: 5px;
 }
+@media only screen and (max-width: 1200px) {
+  .searchItem {
+    width: 95%;
+    flex-direction: column;
+  }
+  .siImg {
+    width: 100%;
+  }
+  .siRating {
+    align-items: center;
+    align-self: end;
+    margin-bottom: 1rem;
+  }
+  .siRating span {
+    margin-right: 1rem;
+  }
+  .siCheckButton {
+    width: 100%;
+    padding: .7rem;
+    margin-top: 1rem;
+  }
+}
