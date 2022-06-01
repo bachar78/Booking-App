@@ -124,10 +124,11 @@
   cursor: pointer;
 }
 
-.anavailable {
+.unavailable {
   font-size: 0.8rem;
   font-weight: 500;
   color: red;
+  text-align: center;
 }
 
 @media only screen and (max-width: 1600px) {

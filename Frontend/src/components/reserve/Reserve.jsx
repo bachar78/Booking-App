@@ -73,7 +73,7 @@ const Reserve = ({ setOpenReserve, hotelId, setConfirmationOpen }) => {
                 <div className='room' key={roomNumber._id}>
                   <label htmlFor=''>{roomNumber.number}</label>
                   {!isAvailable(roomNumber) ? (
-                    <p className='anavailable'>Not Available</p>
+                    <p className='unavailable'>Unavailable</p>
                   ) : (
                     <input
                       type='checkbox'

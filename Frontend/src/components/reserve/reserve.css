@@ -1,7 +1,7 @@
 .reserve {
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.418);
+  width: 100%;
+  min-height: 100vh;
+  background-color: rgba(0, 0, 0, 0.651);
   position: fixed;
   top: 0;
   left: 0;
@@ -16,12 +16,13 @@
   position: relative;
   width: 100%;
   max-width: 100rem;
+  height: 200%;
 }
 
 .reserveClose {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: 0rem;
+  right: 0rem;
   cursor: pointer;
 }
 
@@ -82,23 +83,23 @@ input[type=checkbox] {
 }
 
 @media only screen and (max-width: 720px) {
+ 
   .reserveContainer {
-    padding: 0 .5rem;
+    padding: .5rem;
+    height: 100%;
   }
   .room {
      width: 20%;
      margin-bottom: 1rem;
   }
   .roomItem {
-    margin-top: 1rem;
-    padding: 2rem 0;
+   padding: 0;
+   gap: 2rem;
   }
   .roomMax {
     font-size: .7rem;
   }
-  .reserveContainer {
-    min-height: 100%;
-  }
+ 
   .reserveClose {
     font-size: 1rem;
     color: red;
