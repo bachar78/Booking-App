@@ -8,6 +8,7 @@ import hotelsRoute from './routes/hotelsRoutes.js'
 import roomsRoute from './routes/roomsRoutes.js'
 import errorHandler from './middleware/errorHandler.js'
 import cookieParser from 'cookie-parser'
+import path from 'path'
 
 dotenv.config()
 //Connect with DB
@@ -25,6 +26,20 @@ app.use('/api/auth', authRoute)
 app.use('/api/users', usersRoute)
 app.use('/api/hotels', hotelsRoute)
 app.use('/api/rooms', roomsRoute)
+
+//Serve Frontend
+if (process.env.NODE_ENV === 'production') {
+  //Set build folder as static
+  app.use(express.static(path.join(__dirname, '../Frontend/build')))
+  app.get('*', (req, res) => {
+    res.sendFile(__dirname, '../', 'Frontend', 'build', 'index.html')
+  })
+} else {
+  //Home Route
+  app.get('/', (req, res) => {
+    res.status(200).send({ message: 'Welcome to the Booking-App application' })
+  })
+}
 
 //Error Handler middleware
 app.use(errorHandler)
