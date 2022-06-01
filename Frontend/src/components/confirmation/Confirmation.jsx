@@ -1,6 +1,6 @@
 import './confirmation.css'
 import axios from 'axios'
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useRef } from 'react'
 import { SearchContext } from '../../context/SearchContext'
 import { OrderContext } from '../../context/OrderContext'
 import { useNavigate } from 'react-router-dom'
@@ -25,8 +25,11 @@ const Confirmation = ({ hotelId, setOpenConfirmation }) => {
     id: room.split(',')[0],
     number: room.split(',')[1],
   }))
-
+const executedRef = useRef(false)
   useEffect(() => {
+    if(executedRef.current) {
+      return
+    }
     ;(async () => {
       try {
         const res = await axios.post(`/rooms/confirmation/${hotelId}`, {
@@ -39,7 +42,8 @@ const Confirmation = ({ hotelId, setOpenConfirmation }) => {
         dispatch({ type: 'ORDER_FAILURE', payload: err.response.data })
       }
     })()
-  }, [])
+    executedRef.current = true
+  }, [dispatch, hotelId])
 
   if (error) {
     return (
