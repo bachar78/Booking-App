@@ -1,0 +1,6 @@
+MONGO_URI = #####
+JWT_SECRET = ###
+
+#the Password for application email
+EMAIL_ADDRESS = ###
+EMAIL_PASSWORD = ###
