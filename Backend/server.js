@@ -30,9 +30,13 @@ app.use('/api/rooms', roomsRoute)
 //Serve Frontend
 if (process.env.NODE_ENV === 'production') {
   //Set build folder as static
-  app.use(express.static(path.join(__dirname, '../Frontend/build')))
+  app.use(
+    express.static(new URL('../Frontend/build', import.meta.url).pathname)
+  )
   app.get('*', (req, res) => {
-    res.sendFile(__dirname, '../', 'Frontend', 'build', 'index.html')
+    res.sendFile(
+      new URL('../Frontend/build/index.html', import.meta.url).pathname
+    )
   })
 } else {
   //Home Route
