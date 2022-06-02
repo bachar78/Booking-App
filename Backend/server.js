@@ -30,14 +30,14 @@ app.use('/api/rooms', roomsRoute)
 //Serve Frontend
 if (process.env.NODE_ENV === 'production') {
   //Set build folder as static
-  app.use(
-    express.static(new URL('../../Frontend/build', import.meta.url).pathname)
-  )
-
+  app.use(express.static(path.join(__dirname, '../Frontend/build')))
   app.get('*', (req, res) => {
-    res.sendFile(
-      new URL('../../Frontend/build/index.html', import.meta.url).pathname
-    )
+    res.sendFile(__dirname, '../', 'Frontend', 'build', 'index.html')
+  })
+} else {
+  //Home Route
+  app.get('/', (req, res) => {
+    res.status(200).send({ message: 'Welcome to the task manager application' })
   })
 }
 
