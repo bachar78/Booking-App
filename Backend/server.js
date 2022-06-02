@@ -13,7 +13,7 @@ import path from 'path'
 dotenv.config()
 //Connect with DB
 connectDB()
-const PORT = 5001
+const port = process.env.PORT || 5001
 const app = express()
 
 //middleware
@@ -43,6 +43,6 @@ if (process.env.NODE_ENV === 'production') {
 //Error Handler middleware
 app.use(errorHandler)
 
-app.listen(PORT, () => {
-  console.log(`Server is on ${PORT}`)
+app.listen(port, () => {
+  console.log(`Server is on ${port}`)
 })
