@@ -33,16 +33,11 @@ if (process.env.NODE_ENV === 'production') {
   app.use(
     express.static(new URL('../Frontend/build', import.meta.url).pathname)
   )
-  app.get('*', (req, res) => {
+  app.get('*', (req, res) =>
     res.sendFile(
       new URL('../Frontend/build/index.html', import.meta.url).pathname
     )
-  })
-} else {
-  //Home Route
-  app.get('/', (req, res) => {
-    res.status(200).send({ message: 'Welcome to the task manager application' })
-  })
+  )
 }
 
 //Error Handler middleware
