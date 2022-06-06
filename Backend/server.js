@@ -8,7 +8,7 @@ import hotelsRoute from './routes/hotelsRoutes.js'
 import roomsRoute from './routes/roomsRoutes.js'
 import errorHandler from './middleware/errorHandler.js'
 import cookieParser from 'cookie-parser'
-
+import cors from 'cors'
 
 dotenv.config()
 //Connect with DB
@@ -20,7 +20,7 @@ const app = express()
 app.use(cookieParser())
 app.use(express.json({ limit: '50mb' }))
 app.use(express.urlencoded({ limit: '50mb', extended: true }))
-
+app.use(cors())
 //? Middlewaares of routes
 app.use('/api/auth', authRoute)
 app.use('/api/users', usersRoute)
