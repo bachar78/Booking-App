@@ -9,7 +9,7 @@ const useFetch = (url) => {
     ;(async () => {
       setLoading(true)
       try {
-        const res = await axios.get(`${process.env.SERVER_URL}/api${url}`)
+        const res = await axios.get(`http://localhost:5001/api${url}`)
         setData(res.data)
       } catch(err) {
         setError(err)
