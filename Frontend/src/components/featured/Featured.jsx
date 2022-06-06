@@ -10,7 +10,7 @@ const Featured = () => {
   }
   return (
     <div className='featured'>
-      {loading ? (
+      {/* {loading ? (
         '... is loading'
       ) : (
         <>
@@ -25,7 +25,7 @@ const Featured = () => {
               </div>
             ))}
         </>
-      )}
+      )} */}
     </div>
   )
 }
