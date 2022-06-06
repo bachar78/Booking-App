@@ -25,17 +25,22 @@ const Confirmation = ({ hotelId, setOpenConfirmation }) => {
     id: room.split(',')[0],
     number: room.split(',')[1],
   }))
-const executedRef = useRef(false)
+  const executedRef = useRef(false)
   useEffect(() => {
-    if(executedRef.current) {
+    if (executedRef.current) {
       return
     }
     ;(async () => {
       try {
-        const res = await axios.post(`/rooms/confirmation/${hotelId}`, {
-          rooms: newSelectedRoom,
-          dates: formedDates,
-        })
+        const res = await axios.post(
+          `${
+            process.env.REACT_APP_SERVER_URL || ''
+          }/api/rooms/confirmation/${hotelId}`,
+          {
+            rooms: newSelectedRoom,
+            dates: formedDates,
+          }
+        )
         dispatch({ type: 'ORDER_SUCCESS', payload: res.data })
         setSelectedRooms([])
       } catch (err) {

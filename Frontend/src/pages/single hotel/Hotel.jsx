@@ -18,7 +18,6 @@ import { Link } from 'react-router-dom'
 import { SearchContext } from '../../context/SearchContext'
 import { AuthContext } from '../../context/AuthContext'
 
-
 const Hotel = () => {
   const navigate = useNavigate()
   const { user } = useContext(AuthContext)
@@ -45,7 +44,11 @@ const Hotel = () => {
       }
     }
   }
-  const { data, error, loading } = useFetch(id ? `/hotels/${id}` : '/hotels')
+  const { data, error, loading } = useFetch(
+    id
+      ? `${process.env.REACT_APP_SERVER_URL || ''}/api/hotels/${id}`
+      : `${process.env.REACT_APP_SERVER_URL || ''}/api/hotels`
+  )
 
   const handleClick = () => {
     if (user) {

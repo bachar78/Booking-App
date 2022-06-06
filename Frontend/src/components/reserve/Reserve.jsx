@@ -31,9 +31,14 @@ const Reserve = ({ setOpenReserve, hotelId, setConfirmationOpen }) => {
       await Promise.all(
         selectedRooms.map(async (roomId) => {
           const id = roomId.split(',')[0]
-          const res = await axios.put(`/rooms/availability/${id}`, {
-            dates: allDates,
-          })
+          const res = await axios.put(
+            `${
+              process.env.REACT_APP_SERVER_URL || ''
+            }/api/rooms/availability/${id}`,
+            {
+              dates: allDates,
+            }
+          )
           if (res.data.message === 'reserved') {
             setConfirmationOpen(true)
             setOpenReserve(false)
@@ -62,7 +67,8 @@ const Reserve = ({ setOpenReserve, hotelId, setConfirmationOpen }) => {
               <div className='roomTitle'>{room.title}</div>
               <div className='roomDesc'>{room.desc}</div>
               <div className='roomMax'>
-                <b>Max: </b>{room.maxPeople} person(s)
+                <b>Max: </b>
+                {room.maxPeople} person(s)
               </div>
               <div className='roomPrice'>
                 $ <b>{room.price}</b>
