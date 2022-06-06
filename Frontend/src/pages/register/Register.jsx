@@ -17,7 +17,10 @@ const Register = () => {
   const handleClick = async (e) => {
     e.preventDefault()
     try {
-      const res = await axios.post('/auth/register', credentials)
+      const res = await axios.post(
+        `${process.env.REACT_APP_SERVER_URL || ''}/api/auth/register`,
+        credentials
+      )
       dispatch({ type: 'LOGIN_SUCCESS', payload: res.data })
       navigate('/')
     } catch (err) {
