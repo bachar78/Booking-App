@@ -8,7 +8,7 @@ import hotelsRoute from './routes/hotelsRoutes.js'
 import roomsRoute from './routes/roomsRoutes.js'
 import errorHandler from './middleware/errorHandler.js'
 import cookieParser from 'cookie-parser'
-import path from 'path'
+
 
 dotenv.config()
 //Connect with DB
@@ -43,6 +43,6 @@ if (process.env.NODE_ENV === 'production') {
 //Error Handler middleware
 app.use(errorHandler)
 
-app.listen(port, () => {
-  console.log(`Server is on ${port}`)
+app.listen(PORT, () => {
+  console.log(`Server is on ${PORT}`)
 })
