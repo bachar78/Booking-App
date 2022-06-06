@@ -92,7 +92,7 @@ const List = () => {
                     onChange={(e) => setMax(e.target.value)}
                   />
                 </div>
-                <div className='lsOptionItem'>
+                {/* <div className='lsOptionItem'>
                   <span className='lsOptionText'>Adult</span>
                   <input
                     type='number'
@@ -127,7 +127,7 @@ const List = () => {
                     onChange={handleOptions}
                     value={options.room}
                   />
-                </div>
+                </div> */}
                 <div className='lsOptionItem'>
                   <span className='lsOptionText'>Featured ?</span>
                   <input
