@@ -9,9 +9,11 @@ const useFetch = (url) => {
     ;(async () => {
       setLoading(true)
       try {
-        const res = await axios.get(`${process.env.REACT_APP_SERVER_URL || ''}/api${url}`)
+        const res = await axios.get(
+          `${process.env.REACT_APP_SERVER_URL || ''}/api${url}`
+        )
         setData(res.data)
-      } catch(err) {
+      } catch (err) {
         setError(err)
       }
       setLoading(false)
@@ -21,7 +23,9 @@ const useFetch = (url) => {
   const reFetch = async (url) => {
     setLoading(true)
     try {
-      const res = await axios.get(url)
+      const res = await axios.get(
+        `${process.env.REACT_APP_SERVER_URL || ''}/api${url}`
+      )
       setData(res.data)
     } catch (err) {
       setError(err)

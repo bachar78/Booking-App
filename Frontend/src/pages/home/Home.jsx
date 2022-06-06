@@ -6,7 +6,7 @@ import Footer from '../../components/footer/Footer'
 import './home.css'
 
 const Home = () => {
-  console.log(process.env.REACT_APP_SERVER_URL)
+  
   return (
     <>
       <Navbar />

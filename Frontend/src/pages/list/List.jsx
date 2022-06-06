@@ -143,9 +143,6 @@ const List = () => {
             </div>
             <button
               onClick={() => {
-                if (!destination || dates.startDate === dates.endDate) {
-                  return
-                }
                 if (featured) {
                   reFetch(
                     `/hotels?city=${destination}&min=${min || 1}&max=${
