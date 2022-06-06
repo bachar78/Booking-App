@@ -13,7 +13,7 @@ import path from 'path'
 dotenv.config()
 //Connect with DB
 connectDB()
-const port = process.env.PORT || 5001
+const PORT = process.env.PORT || 5001
 const app = express()
 
 //middleware
