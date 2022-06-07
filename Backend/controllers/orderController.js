@@ -5,7 +5,7 @@ import asyncHandler from 'express-async-handler'
 import nodemailer from 'nodemailer'
 export const createOrder = asyncHandler(async (req, res, next) => {
   const { id } = req.params
-  const { rooms, dates } = req.body
+  const { rooms, dates, userInf } = req.body
   const hotel = await Hotel.findById(id)
   if (!hotel) {
     res.status(404)
@@ -16,7 +16,7 @@ export const createOrder = asyncHandler(async (req, res, next) => {
     throw new Error('You should insert two different dates')
   }
   const order = await Order.create({
-    user: req.user.username,
+    user: userInf.username,
     startDate: dates.startDate,
     endDate: dates.endDate,
   })
@@ -24,7 +24,7 @@ export const createOrder = asyncHandler(async (req, res, next) => {
     res.status(404)
     throw new Error("Order can't be done")
   }
-  order.user = req.user.username
+  
   order.hotel.name = hotel.name
   order.hotel.address = hotel.address
   order.hotel.city = hotel.city
@@ -62,7 +62,7 @@ export const createOrder = asyncHandler(async (req, res, next) => {
   })
   let mailOptions = {
     from: process.env.EMAIL_ADDRESS, // sender address
-    to: req.user.email, // list of receivers
+    to: userInf.email, // list of receivers
     subject: 'Confirmation of reservation', // Subject line
     text: 'Hello world?', // plain text body
     html: output, // html body

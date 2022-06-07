@@ -22,13 +22,13 @@ router
   .get(verifyToken, verifyAdmin, getRoom)
 
 //update availability
-router.route('/availability/:id').put(verifyToken, updateRoomAvailability)
+router.route('/availability/:id').put(updateRoomAvailability)
 
 //Delete a Room
 router.route('/:hotelId/:id').delete(verifyToken, verifyAdmin, deleteRoom)
 
 //Send Confirmation email 
-router.route('/confirmation/:id').post(verifyToken, createOrder)
+router.route('/confirmation/:id').post(createOrder)
 
 
 export default router

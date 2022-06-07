@@ -44,11 +44,7 @@ const Hotel = () => {
       }
     }
   }
-  const { data, error, loading } = useFetch(
-    id
-      ? `${process.env.REACT_APP_SERVER_URL || ''}/api/hotels/${id}`
-      : `${process.env.REACT_APP_SERVER_URL || ''}/api/hotels`
-  )
+  const { data, error, loading } = useFetch(id ? `/hotels/${id}` : `/hotels`)
 
   const handleClick = () => {
     if (user) {

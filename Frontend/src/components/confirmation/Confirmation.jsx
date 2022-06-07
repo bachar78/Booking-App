@@ -2,6 +2,7 @@ import './confirmation.css'
 import axios from 'axios'
 import { useContext, useEffect, useRef } from 'react'
 import { SearchContext } from '../../context/SearchContext'
+import { AuthContext } from '../../context/AuthContext'
 import { OrderContext } from '../../context/OrderContext'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
@@ -10,6 +11,7 @@ import { dayDifference } from '../../utils/dayDifference'
 const Confirmation = ({ hotelId, setOpenConfirmation }) => {
   const { dates, selectedRooms, setSelectedRooms } = useContext(SearchContext)
   const { order, error, loading, dispatch } = useContext(OrderContext)
+  const { user } = useContext(AuthContext)
   const days = dayDifference(dates[0].endDate, dates[0].startDate)
   const navigate = useNavigate()
   const handleClick = () => {
@@ -39,6 +41,7 @@ const Confirmation = ({ hotelId, setOpenConfirmation }) => {
           {
             rooms: newSelectedRoom,
             dates: formedDates,
+            userInf: { username: user.username, email: user.email },
           }
         )
         dispatch({ type: 'ORDER_SUCCESS', payload: res.data })
