@@ -30,9 +30,9 @@ const List = () => {
       </h1>
     )
   }
-  const handleOptions = (e) => {
-    setOptions((prev) => ({ ...prev, [e.target.name]: e.target.value }))
-  }
+  // const handleOptions = (e) => {
+  //   setOptions((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+  // }
 
   return (
     <div>

@@ -4,11 +4,11 @@ import axios from 'axios'
 import useFetch from '../../hooks/useFetch'
 
 import './reserve.css'
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import { SearchContext } from '../../context/SearchContext'
 import getDatesInRange from '../../utils/getDatesInRange'
 const Reserve = ({ setOpenReserve, hotelId, setConfirmationOpen }) => {
-  const { data, loading, error } = useFetch(`/hotels/rooms/${hotelId}`)
+  const { data } = useFetch(`/hotels/rooms/${hotelId}`)
   const { dates, selectedRooms, setSelectedRooms } = useContext(SearchContext)
   const handleSelect = (e) => {
     const checked = e.target.checked
